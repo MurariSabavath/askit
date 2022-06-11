@@ -39,6 +39,14 @@ const Header = () => {
     setShowResults(false);
   };
 
+  const handleDropdownClick = () => {
+    if (user === null) {
+      navigate("/login");
+    } else {
+      setShowDropdown(!showDropdown);
+    }
+  };
+
   useEffect(() => {
     const access_token = JSON.parse(localStorage.getItem("access_token"));
     if (access_token) {
@@ -47,7 +55,7 @@ const Header = () => {
           headers: { "x-auth-token": access_token },
         })
         .then((resp) => {
-          localStorage.setItem("user", resp.data);
+          localStorage.setItem("user", JSON.stringify(resp.data));
           setUser(resp.data);
         })
         .catch((err) => console.log(err));
@@ -79,15 +87,12 @@ const Header = () => {
           </ResultContainer>
         )}
       </GridTwo>
-      <GridThree
-        className="three"
-        onClick={() => setShowDropdown(!showDropdown)}
-      >
+      <GridThree className="three" onClick={handleDropdownClick}>
         <div>
-          <p>{user?.name}</p>
-          <FiChevronDown />
+          <p>{user === null ? "Login" : user?.name}</p>
+          {user !== null && <FiChevronDown />}
         </div>
-        {showDropdown && (
+        {showDropdown && user !== null && (
           <ProfileDropdown>
             <DropdownElement>
               <Link to="/user/profile">Profile</Link>

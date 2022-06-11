@@ -8,6 +8,7 @@ export const HeaderContainer = styled.nav`
   top: 0;
   left: 0;
   width: 100%;
+  padding-inline: 10px;
   z-index: 1;
   background: #ffffff;
 
@@ -59,6 +60,11 @@ export const GridThree = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
   }
 
   &:hover {
@@ -96,6 +102,9 @@ export const InputContianer = styled.div`
   & > input {
     padding-left: 40px;
     ${inputStyle};
+    &::placeholder {
+      text-transform: capitalize;
+    }
   }
 
   svg {

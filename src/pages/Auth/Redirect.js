@@ -7,7 +7,7 @@ const Redirect = () => {
 
   useEffect(() => {
     const accessToken = location.search.split("?")[1];
-    localStorage.setItem("access_token", accessToken);
+    localStorage.setItem("access_token", JSON.stringify(accessToken));
     navigate("/");
   }, [location.search, navigate]);
 

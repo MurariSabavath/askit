@@ -41,7 +41,7 @@ export const FormControl = styled.div`
 
   input {
     padding-left: 10px;
-    ${inputStyle}
+    ${inputStyle};
   }
 `;
 
