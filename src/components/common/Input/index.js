@@ -8,6 +8,7 @@ const Input = ({
   onChange,
   autoComplete,
   onBlur,
+  maxLength,
 }) => {
   return (
     <StyledInput
@@ -19,6 +20,7 @@ const Input = ({
       onChange={onChange}
       autoComplete={autoComplete}
       onBlur={onBlur}
+      maxLength={maxLength}
     />
   );
 };

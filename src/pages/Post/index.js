@@ -1,40 +1,87 @@
+import axios from "axios";
 import MDEditor from "@uiw/react-md-editor";
+import Multiselect from "multiselect-react-dropdown";
 import rehypeSanitize from "rehype-sanitize";
 import { useState } from "react";
-import { Container, InputContainer } from "./styled";
+import { BtnContainer, Container, InputContainer } from "./styled";
 import Input from "../../components/common/Input";
+import Button from "../../components/common/Button";
 
 const Post = () => {
-  const [value, setValue] = useState("");
+  const [postBody, setPostBody] = useState("");
   const [title, setTitle] = useState("");
-  console.log(value);
+  const [tags, setTags] = useState([]);
   // api/posts/add
   // {title: '', data: '', tags: ''}
 
-  console.log(title);
+  const handleSelect = (selectedList) => {
+    setTags(selectedList);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const access_token = JSON.parse(localStorage.getItem("access_token"));
+    if (access_token) {
+      axios
+        .post(
+          `${process.env.REACT_APP_API_URL}/posts/add`,
+          {
+            title,
+            data: postBody,
+            tags,
+          },
+          {
+            headers: { "x-auth-token": access_token },
+          },
+        )
+        .then((resp) => {
+          console.log(resp);
+        })
+        .catch((err) => console.log(err));
+    }
+  };
 
   return (
     <>
       <Container className="container">
-        <InputContainer>
-          <Input
-            type="text"
-            name="title"
-            placeholder="Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+        <form>
+          <InputContainer>
+            <Input
+              type="text"
+              name="title"
+              placeholder="Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </InputContainer>
+          <MDEditor
+            value={postBody}
+            onChange={setPostBody}
+            height={500}
+            previewOptions={{
+              rehypePlugins: [[rehypeSanitize]],
+            }}
           />
-        </InputContainer>
-
-        <MDEditor
-          value={value}
-          onChange={setValue}
-          height={500}
-          previewOptions={{
-            rehypePlugins: [[rehypeSanitize]],
-          }}
-        />
-        <MDEditor.Markdown source={value} rehypePlugins={[[rehypeSanitize]]} />
+          <MDEditor.Markdown
+            source={postBody}
+            rehypePlugins={[[rehypeSanitize]]}
+          />
+          <Multiselect
+            isObject={false}
+            onSelect={handleSelect}
+            loading={false}
+            options={["Python", "Javascript", "HTML", "CSS", "Typescript"]}
+            style={{
+              searchBox: {
+                padding: "10px",
+                marginTop: "20px",
+              },
+            }}
+          />
+          <BtnContainer>
+            <Button handleClick={handleSubmit}>Submit</Button>
+          </BtnContainer>
+        </form>
       </Container>
     </>
   );

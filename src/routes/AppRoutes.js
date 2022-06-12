@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "../pages/Home";
 import Register from "../pages/Auth/Register";
 import Login from "../pages/Auth/Login";
@@ -9,10 +9,12 @@ import MainOutlet from "./MainOutlet";
 import AuthOutlet from "./AuthOutlet";
 import Profile from "../pages/Profile";
 import Post from "../pages/Post";
+import CustomRouter from "./CustomRoute";
+import history from "../utils/history";
 
 const AppRouter = () => {
   return (
-    <BrowserRouter>
+    <CustomRouter history={history}>
       <Routes>
         <Route element={<AuthOutlet />}>
           <Route path="/login" element={<Login />} />
@@ -30,7 +32,7 @@ const AppRouter = () => {
           <Route path="/post" element={<Post />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </CustomRouter>
   );
 };
 

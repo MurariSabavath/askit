@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useMutation } from "react-query";
 import Button from "../../components/common/Button";
 import Input from "../../components/common/Input";
 import {
@@ -12,10 +13,26 @@ import {
   Title,
   OrContainer,
 } from "./styled";
-import axios from "axios";
+import { apiInstance, requestInterceptor } from "../../services/axiosInstance";
 
 const Register = () => {
   const navigate = useNavigate();
+  const { mutate } = useMutation(
+    () => {
+      apiInstance.interceptors.request.eject(requestInterceptor);
+      return apiInstance.post("/users/register", formInputData);
+    },
+    {
+      onSuccess: () => {
+        toast.success(
+          "Your account has been created. Check your email for verification",
+        );
+        navigate("/login");
+      },
+      onError: (error) => toast.error(error.response.data.error),
+    },
+  );
+
   const [formInputData, setFormInputData] = useState({
     name: "",
     email: "",
@@ -27,19 +44,6 @@ const Register = () => {
       ...formInputData,
       [e.target.name]: e.target.value,
     });
-  };
-
-  const handleRegiseter = (e) => {
-    e.preventDefault();
-    axios
-      .post(`${process.env.REACT_APP_API_URL}/users/register`, formInputData)
-      .then(() => {
-        toast.success(
-          "Your account has been created. Check your email for verification",
-        );
-        navigate("/login");
-      })
-      .catch((err) => toast.error(err.response.data.error));
   };
 
   return (
@@ -81,7 +85,7 @@ const Register = () => {
         />
       </FormControl>
       <BtnContainer>
-        <Button handleClick={handleRegiseter}>Register</Button>
+        <Button handleClick={() => mutate()}>Register</Button>
       </BtnContainer>
       <BottomContainer>
         <p>

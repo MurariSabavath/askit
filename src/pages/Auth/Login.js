@@ -1,7 +1,7 @@
 import { useState } from "react";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
+import { useMutation } from "react-query";
 import Button from "../../components/common/Button";
 import Input from "../../components/common/Input";
 import {
@@ -13,9 +13,24 @@ import {
   Title,
   OrContainer,
 } from "./styled";
+import { apiInstance } from "../../services/axiosInstance";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { mutate } = useMutation(
+    () => {
+      return apiInstance.post("/users/login", formInputData);
+    },
+    {
+      onSuccess: (data) => {
+        const access_token = data.headers["x-auth-token"];
+        localStorage.setItem("access_token", JSON.stringify(access_token));
+        navigate("/");
+      },
+      onError: (error) => toast.error(error.response.data.error),
+    },
+  );
+
   const [formInputData, setFormInputData] = useState({
     email: "",
     password: "",
@@ -26,21 +41,6 @@ const Login = () => {
       ...formInputData,
       [e.target.name]: e.target.value,
     });
-  };
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    axios
-      .post(`${process.env.REACT_APP_API_URL}/users/login`, formInputData)
-      .then((resp) => {
-        localStorage.setItem(
-          "access_token",
-          JSON.stringify(resp.headers["x-auth-token"]),
-        );
-        toast.success(resp.data.message);
-        navigate("/");
-      })
-      .catch((err) => toast.error(err.response.data.error));
   };
 
   return (
@@ -73,7 +73,7 @@ const Login = () => {
         />
       </FormControl>
       <BtnContainer>
-        <Button handleClick={handleLogin}>Login</Button>
+        <Button handleClick={() => mutate()}>Login</Button>
       </BtnContainer>
       <BottomContainer>
         <p>

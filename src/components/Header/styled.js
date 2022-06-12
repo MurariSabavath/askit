@@ -48,7 +48,7 @@ export const GridTwo = styled.div`
 export const GridThree = styled.div`
   grid-area: three;
   position: relative;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.3);
   max-width: 250px;
   width: 100%;
   height: 48px;

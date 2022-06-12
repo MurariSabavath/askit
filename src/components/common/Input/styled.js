@@ -9,7 +9,7 @@ export const inputStyle = css`
   padding-right: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 5px;
   font-size: 14px;
   outline: none;
