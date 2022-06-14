@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 import Button from "../../components/common/Button";
 import Input from "../../components/common/Input";
@@ -17,6 +17,9 @@ import { apiInstance } from "../../services/axiosInstance";
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location.state);
+
   const { mutate } = useMutation(
     () => {
       return apiInstance.post("/users/login", formInputData);
@@ -25,7 +28,8 @@ const Login = () => {
       onSuccess: (data) => {
         const access_token = data.headers["x-auth-token"];
         localStorage.setItem("access_token", JSON.stringify(access_token));
-        navigate("/");
+        const from = location.state?.from?.pathname || "/";
+        navigate(from);
       },
       onError: (error) => toast.error(error.response.data.error),
     },

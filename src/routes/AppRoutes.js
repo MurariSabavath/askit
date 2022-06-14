@@ -8,9 +8,10 @@ import InvalidEmailVerification from "../pages/Auth/InvalidEmailVerification";
 import MainOutlet from "./MainOutlet";
 import AuthOutlet from "./AuthOutlet";
 import Profile from "../pages/Profile";
-import Post from "../pages/Post";
 import CustomRouter from "./CustomRoute";
 import history from "../utils/history";
+import QuestionPost from "../pages/QuestionPost";
+import ProtectedRoutes from "./ProtectedOutlet";
 
 const AppRouter = () => {
   return (
@@ -28,8 +29,10 @@ const AppRouter = () => {
         </Route>
         <Route path="/" element={<MainOutlet />}>
           <Route path="/" element={<Home />} />
-          <Route path="/user/profile" element={<Profile />} />
-          <Route path="/post" element={<Post />} />
+          <Route element={<ProtectedRoutes />}>
+            <Route path="/user/profile" element={<Profile />} />
+            <Route path="/question/ask" element={<QuestionPost />} />
+          </Route>
         </Route>
       </Routes>
     </CustomRouter>
