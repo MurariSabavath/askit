@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
+import { Link } from "react-router-dom";
 import { btnStyles } from "../common/Button/styled";
 import { inputStyle } from "../common/Input/styled";
 
@@ -34,7 +35,7 @@ export const GridOne = styled.div`
   a {
     font-size: medium;
     text-decoration: none;
-    color: black;
+    color: ${({ theme }) => theme.text};
     font-weight: bolder;
   }
 `;
@@ -56,30 +57,26 @@ export const GridThree = styled.div`
   padding-inline: 10px;
   cursor: pointer;
 
-  div {
+  & > div {
+    min-width: 200px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    a {
-      text-decoration: none;
-      color: black;
-    }
   }
 
   &:hover {
-    border: 1px solid #0079d3;
+    border: 1px solid ${({ theme }) => theme.outline};
   }
 `;
 
 export const ResultContainer = styled.div`
   position: absolute;
-  background: #ffffff;
+  background: ${({ theme }) => theme.bg};
   width: 100%;
   z-index: 1;
-  box-shadow: 4px 5px 13px 0px rgba(0, 0, 0, 0.19);
-  -webkit-box-shadow: 4px 5px 13px 0px rgba(0, 0, 0, 0.19);
-  -moz-box-shadow: 4px 5px 13px 0px rgba(0, 0, 0, 0.19);
+  box-shadow: 0px 5px 13px 0px ${({ theme }) => theme.shadow};
+  -webkit-box-shadow: 0px 5px 13px 0px ${({ theme }) => theme.shadow};
+  -moz-box-shadow: 0px 5px 13px 0px ${({ theme }) => theme.shadow};
 `;
 
 export const ResultCard = styled.div`
@@ -127,21 +124,35 @@ export const ProfileDropdown = styled(ResultContainer)`
     border-radius: 0;
     font-size: 14px;
     margin: 0;
+    text-align: left;
+
+    &:hover {
+      background: ${({ theme }) => theme.specialBgContrast};
+    }
   }
 `;
 
-export const DropdownElement = styled.div`
+export const DropDownLinkContainer = styled.div`
   width: 100%;
-  a {
+  & > a {
     padding: 10px;
     text-align: left;
     display: block;
     width: 100%;
     text-decoration: none;
-    color: black;
+    background: ${({ theme }) => theme.specialBg};
+    color: ${({ theme }) => theme.text};
 
     &:hover {
-      background: rgba(0, 0, 0, 0.1);
+      background: ${({ theme }) => theme.specialBgContrast};
     }
   }
+`;
+
+export const DropDownElement = styled.div`
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;

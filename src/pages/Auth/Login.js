@@ -18,7 +18,6 @@ import { apiInstance } from "../../services/axiosInstance";
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location.state);
 
   const { mutate } = useMutation(
     () => {
@@ -28,8 +27,12 @@ const Login = () => {
       onSuccess: (data) => {
         const access_token = data.headers["x-auth-token"];
         localStorage.setItem("access_token", JSON.stringify(access_token));
-        const from = location.state?.from?.pathname || "/";
-        navigate(from);
+        const from = location.state?.from;
+        if (from) {
+          navigate(from);
+        } else {
+          navigate("/");
+        }
       },
       onError: (error) => toast.error(error.response.data.error),
     },

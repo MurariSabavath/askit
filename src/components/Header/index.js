@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Switch from "react-switch";
 import { FiSearch, FiChevronDown } from "react-icons/fi";
 import Button from "../common/Button";
 import Input from "../common/Input";
 import {
-  DropdownElement,
+  DropDownElement,
+  DropDownLink,
+  DropDownLinkContainer,
   GridOne,
   GridThree,
   GridTwo,
@@ -25,6 +28,7 @@ const Header = ({ theme, setTheme }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [user, setUser] = useState(null);
   const [search, setSearch] = useState("");
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const handleClick = () => {
     localStorage.clear();
@@ -56,6 +60,7 @@ const Header = ({ theme, setTheme }) => {
   };
 
   useEffect(() => {
+    setIsDarkMode(theme === "dark");
     const access_token = JSON.parse(localStorage.getItem("access_token"));
     if (access_token) {
       axios
@@ -95,18 +100,33 @@ const Header = ({ theme, setTheme }) => {
           </ResultContainer>
         )}
       </GridTwo>
-      <GridThree className="three" onClick={handleDropdownClick}>
-        <div>
+      <GridThree className="three">
+        <div onClick={handleDropdownClick}>
           <p>{user === null ? "Login" : user?.name}</p>
           {user !== null && <FiChevronDown fill={themeContext.input} />}
         </div>
         {showDropdown && user !== null && (
           <ProfileDropdown>
-            <DropdownElement>
+            <DropDownLinkContainer>
               <Link to="/user/profile">Profile</Link>
-            </DropdownElement>
+            </DropDownLinkContainer>
             <Button handleClick={handleClick}>Logout</Button>
-            <Button handleClick={toggleTheme}>Toggle Theme</Button>
+            <DropDownElement>
+              <div>Dark mode</div>
+              <div>
+                <Switch
+                  onChange={(value) => {
+                    toggleTheme();
+                    setIsDarkMode(value);
+                  }}
+                  onColor={themeContext.specialBg}
+                  offColor={themeContext.dark}
+                  checked={isDarkMode}
+                  uncheckedIcon={false}
+                  checkedIcon={false}
+                />
+              </div>
+            </DropDownElement>
           </ProfileDropdown>
         )}
       </GridThree>
