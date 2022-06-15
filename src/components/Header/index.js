@@ -16,8 +16,10 @@ import {
   ResultContainer,
 } from "./styled";
 import axios from "axios";
+import { useTheme } from "styled-components";
 
-const Header = () => {
+const Header = ({ theme, setTheme }) => {
+  const themeContext = useTheme();
   const navigate = useNavigate();
   const [showResults, setShowResults] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -28,6 +30,12 @@ const Header = () => {
     localStorage.clear();
     toast.success("Logout success!");
     navigate("/login");
+  };
+
+  const toggleTheme = () => {
+    const updatedTheme = theme === "dark" ? "light" : "dark";
+    setTheme(updatedTheme);
+    localStorage.setItem("theme", updatedTheme);
   };
 
   const handleInputChange = (e) => {
@@ -77,7 +85,7 @@ const Header = () => {
             onChange={handleInputChange}
             onBlur={onBlur}
           />
-          <FiSearch size={25} color="#00000090" />
+          <FiSearch size={25} fill={themeContext.input} />
         </InputContianer>
         {showResults && (
           <ResultContainer>
@@ -90,7 +98,7 @@ const Header = () => {
       <GridThree className="three" onClick={handleDropdownClick}>
         <div>
           <p>{user === null ? "Login" : user?.name}</p>
-          {user !== null && <FiChevronDown />}
+          {user !== null && <FiChevronDown fill={themeContext.input} />}
         </div>
         {showDropdown && user !== null && (
           <ProfileDropdown>
@@ -98,6 +106,7 @@ const Header = () => {
               <Link to="/user/profile">Profile</Link>
             </DropdownElement>
             <Button handleClick={handleClick}>Logout</Button>
+            <Button handleClick={toggleTheme}>Toggle Theme</Button>
           </ProfileDropdown>
         )}
       </GridThree>

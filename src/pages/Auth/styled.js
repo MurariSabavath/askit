@@ -12,10 +12,10 @@ export const Container = styled.div`
   border-radius: 5px;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.05);
-  box-shadow: 4px 2px 9px 1px rgba(0, 0, 0, 0.1);
-  -webkit-box-shadow: 4px 2px 9px 1px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: 4px 2px 9px 1px rgba(0, 0, 0, 0.1);
+  background: ${({ theme }) => theme.bgContrast};
+  box-shadow: 0px 2px 9px 1px ${({ theme }) => theme.shadow};
+  -webkit-box-shadow: 0px 2px 9px 1px ${({ theme }) => theme.shadow};
+  -moz-box-shadow: 0px 2px 9px 1px ${({ theme }) => theme.shadow};
 
   @media (max-width: 450px) {
     width: 90%;
@@ -47,24 +47,20 @@ export const FormControl = styled.div`
 
 export const BottomContainer = styled.section`
   font-size: 12px;
-  color: rgba(0, 0, 0, 0.7);
+  color: ${({ theme }) => theme.text};
   font-weight: 400;
   letter-spacing: 0.5px;
 
   a {
-    color: #0079d3;
+    color: ${({ theme }) => theme.special};
     text-decoration: none;
-
-    &:hover {
-      color: #0079d390;
-    }
   }
 `;
 
 export const SocialAuth = styled.a`
-  background: rgba(255, 255, 255, 0.8);
+  background: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.bg};
   border-radius: 5px;
-  color: #0079d3;
   display: block;
   padding: 10px;
   cursor: pointer;
@@ -74,7 +70,7 @@ export const SocialAuth = styled.a`
   text-decoration: none;
 
   &:hover {
-    opacity: 0.7;
+    opacity: 0.8;
   }
 
   img {
@@ -90,7 +86,7 @@ export const OrContainer = styled.div`
 
   &:before,
   &:after {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: ${({ theme }) => theme.light};
     content: "";
     display: inline-block;
     height: 1px;

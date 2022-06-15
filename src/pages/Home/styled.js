@@ -16,7 +16,8 @@ export const Container = styled.div`
 `;
 
 export const PostLink = styled(Link)`
-  ${btnStyles}
+  ${btnStyles};
+  color: ${({ theme }) => theme.specialText};
   width: fit-content;
   padding-inline: 20px;
   font-size: 14px;

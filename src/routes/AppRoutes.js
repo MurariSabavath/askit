@@ -13,7 +13,7 @@ import history from "../utils/history";
 import QuestionPost from "../pages/QuestionPost";
 import ProtectedRoutes from "./ProtectedOutlet";
 
-const AppRouter = () => {
+const AppRouter = ({ theme, setTheme }) => {
   return (
     <CustomRouter history={history}>
       <Routes>
@@ -27,7 +27,10 @@ const AppRouter = () => {
           />
           <Route path="register" element={<Register />} />
         </Route>
-        <Route path="/" element={<MainOutlet />}>
+        <Route
+          path="/"
+          element={<MainOutlet theme={theme} setTheme={setTheme} />}
+        >
           <Route path="/" element={<Home />} />
           <Route element={<ProtectedRoutes />}>
             <Route path="/user/profile" element={<Profile />} />

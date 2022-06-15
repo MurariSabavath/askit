@@ -10,7 +10,7 @@ export const HeaderContainer = styled.nav`
   width: 100%;
   padding-inline: 10px;
   z-index: 1;
-  background: #ffffff;
+  background: ${({ theme }) => theme.bg};
 
   display: grid;
   grid-auto-columns: 1fr;
@@ -24,9 +24,9 @@ export const HeaderContainer = styled.nav`
   align-items: center;
   padding-top: 10px;
 
-  box-shadow: 5px 5px 7px -6px rgba(0, 0, 0, 0.3);
-  -webkit-box-shadow: 5px 5px 7px -6px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 5px 5px 7px -6px rgba(0, 0, 0, 0.3);
+  box-shadow: 5px 5px 7px -6px ${({ theme }) => theme.shadow};
+  -webkit-box-shadow: 5px 5px 7px -6px ${({ theme }) => theme.shadow};
+  -moz-box-shadow: 5px 5px 7px -6px ${({ theme }) => theme.shadow};
 `;
 
 export const GridOne = styled.div`
@@ -48,7 +48,7 @@ export const GridTwo = styled.div`
 export const GridThree = styled.div`
   grid-area: three;
   position: relative;
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  border: 1px solid ${({ theme }) => theme.text};
   max-width: 250px;
   width: 100%;
   height: 48px;
