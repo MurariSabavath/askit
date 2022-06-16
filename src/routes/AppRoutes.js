@@ -12,6 +12,7 @@ import CustomRouter from "./CustomRoute";
 import history from "../utils/history";
 import QuestionPost from "../pages/QuestionPost";
 import ProtectedRoutes from "./ProtectedOutlet";
+import Posts from "../pages/Posts";
 
 const AppRouter = ({ theme, setTheme }) => {
   return (
@@ -32,6 +33,7 @@ const AppRouter = ({ theme, setTheme }) => {
           element={<MainOutlet theme={theme} setTheme={setTheme} />}
         >
           <Route path="/" element={<Home />} />
+          <Route path="/posts" element={<Posts />} />
           <Route element={<ProtectedRoutes />}>
             <Route path="/user/profile" element={<Profile />} />
             <Route path="/question/ask" element={<QuestionPost />} />
