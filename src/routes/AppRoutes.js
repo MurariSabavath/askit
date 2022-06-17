@@ -13,6 +13,8 @@ import history from "../utils/history";
 import QuestionPost from "../pages/QuestionPost";
 import ProtectedRoutes from "./ProtectedOutlet";
 import Posts from "../pages/Posts";
+import IndividualPost from "../pages/IndividualPost";
+import QuestionEdit from "../pages/QuestionEdit";
 
 const AppRouter = ({ theme, setTheme }) => {
   return (
@@ -34,6 +36,8 @@ const AppRouter = ({ theme, setTheme }) => {
         >
           <Route path="/" element={<Home />} />
           <Route path="/posts" element={<Posts />} />
+          <Route path="/posts/post/:id" element={<IndividualPost />} />
+          <Route path="/posts/post/edit/:id" element={<QuestionEdit />} />
           <Route element={<ProtectedRoutes />}>
             <Route path="/user/profile" element={<Profile />} />
             <Route path="/question/ask" element={<QuestionPost />} />

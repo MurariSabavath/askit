@@ -16,9 +16,7 @@ const QuestionPost = () => {
   const [tags, setTags] = useState([]);
   const navigate = useNavigate();
   const { mutate } = useMutation(
-    () => {
-      apiInstance.post("/posts/add", { title, data: postBody, tags });
-    },
+    () => apiInstance.post("/posts/add", { title, data: postBody, tags }),
     {
       onSuccess: () => {
         toast.success("Your question has been posted successfully");
@@ -65,7 +63,15 @@ const QuestionPost = () => {
           }}
         />
         <BtnContainer>
-          <Button handleClick={() => mutate()}>Submit</Button>
+          <Button
+            handleClick={(e) => {
+              e.preventDefault();
+              console.log(title, postBody, tags);
+              mutate();
+            }}
+          >
+            Submit
+          </Button>
         </BtnContainer>
       </form>
     </Container>
