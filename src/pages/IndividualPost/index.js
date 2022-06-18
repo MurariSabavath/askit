@@ -1,7 +1,7 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { apiInstance } from "../../services/axiosInstance";
 import { Container, Message } from "./styled";
 import SyntaxHighlightForMarkdown from "../SyntaxHighlighterForMarkdown";
@@ -34,6 +34,7 @@ const IndividualPost = () => {
         components={SyntaxHighlightForMarkdown}
         children={data.data.post.data}
       />
+      <Link to={`/posts/post/edit/${id}`}>Edit</Link>
     </Container>
   );
 };
