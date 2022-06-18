@@ -16,10 +16,6 @@ export const MainContainer = styled.section`
 export const PostContainerRow = styled.section`
   border-radius: 5px;
   overflow: hidden;
-
-  p {
-    text-align: center;
-  }
 `;
 
 export const PostBody = styled.div`
@@ -32,6 +28,17 @@ export const PostBody = styled.div`
   box-shadow: 1px 2px 5px 0px ${({ theme }) => theme.shadow};
   -webkit-box-shadow: 1px 2px 5px 0px ${({ theme }) => theme.shadow};
   -moz-box-shadow: 1px 2px 5px 0px ${({ theme }) => theme.shadow};
+
+  h1 {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+`;
+
+export const AuthorName = styled.p`
+  margin-bottom: 0;
+  color: ${({ theme }) => theme.special};
+  text-align: left;
 `;
 
 export const TagContainer = styled.div`
@@ -66,4 +73,20 @@ export const PostLink = styled(Link)`
   font-size: 14px;
   text-decoration: none;
   margin: 0;
+`;
+
+export const DetailsRow = styled.div`
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
+
+  p {
+    margin: 0;
+  }
+`;
+
+export const PostTime = styled.p`
+  color: ${({ theme }) => theme.specialText};
+  font-size: 10px;
+  padding-left: 12px;
 `;

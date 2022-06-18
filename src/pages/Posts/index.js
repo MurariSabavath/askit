@@ -1,13 +1,18 @@
 import React from "react";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
+import Loading from "../../components/common/Loading";
 import { apiInstance } from "../../services/axiosInstance";
+import duration from "../../utils/duration";
 import {
+  AuthorName,
   ContainerRow,
+  DetailsRow,
   MainContainer,
   PostBody,
   PostContainerRow,
   PostLink,
+  PostTime,
   TagContainer,
 } from "./styled";
 
@@ -18,22 +23,10 @@ const Posts = () => {
   );
 
   if (isLoading) {
-    return (
-      <MainContainer>
-        <PostBody>
-          <p>Loading...</p>
-        </PostBody>
-      </MainContainer>
-    );
+    return <Loading>Loading...</Loading>;
   }
   if (isError) {
-    return (
-      <MainContainer>
-        <PostBody>
-          <p>Error...</p>
-        </PostBody>
-      </MainContainer>
-    );
+    return <Loading>Error...</Loading>;
   }
 
   return (
@@ -43,16 +36,24 @@ const Posts = () => {
         <PostLink to="/question/ask">Want to Ask</PostLink>
       </ContainerRow>
       <PostContainerRow>
-        {data.data.posts.map(({ _id, title, tags, author }) => (
-          <PostBody key={_id} onClick={() => navigate(`/posts/post/${_id}`)}>
-            <h4>{author.name}</h4>
-            <h1>{title}</h1>
-            <TagContainer>
-              {tags.length > 0 &&
-                tags[0].map((item, index) => <p key={index}>{item}</p>)}
-            </TagContainer>
-          </PostBody>
-        ))}
+        {data.data.posts.map(({ _id, title, tags, author, date }) => {
+          const diff = duration(date);
+          return (
+            <PostBody key={_id} onClick={() => navigate(`/posts/post/${_id}`)}>
+              <h1>{title}</h1>
+              <TagContainer>
+                {tags.length > 0 &&
+                  tags[0].map((item, index) => <p key={index}>{item}</p>)}
+              </TagContainer>
+              <DetailsRow>
+                <AuthorName>{author.name}</AuthorName>
+                <PostTime>{`Asked ${Object.values(diff)[0]} ${
+                  Object.keys(diff)[0]
+                } ago`}</PostTime>
+              </DetailsRow>
+            </PostBody>
+          );
+        })}
       </PostContainerRow>
     </MainContainer>
   );

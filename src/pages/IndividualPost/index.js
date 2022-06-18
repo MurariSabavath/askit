@@ -3,8 +3,9 @@ import ReactMarkdown from "react-markdown";
 import { useQuery } from "react-query";
 import { Link, useParams } from "react-router-dom";
 import { apiInstance } from "../../services/axiosInstance";
-import { Container, Message } from "./styled";
+import { Container } from "./styled";
 import SyntaxHighlightForMarkdown from "../SyntaxHighlighterForMarkdown";
+import Loading from "../../components/common/Loading";
 
 const IndividualPost = () => {
   const { id } = useParams();
@@ -13,19 +14,11 @@ const IndividualPost = () => {
   );
 
   if (isLoading) {
-    return (
-      <Container>
-        <Message>Loading...</Message>
-      </Container>
-    );
+    return <Loading>Loading...</Loading>;
   }
 
   if (isError) {
-    return (
-      <Container>
-        <Message>Error</Message>
-      </Container>
-    );
+    return <Loading>Error...</Loading>;
   }
   return (
     <Container>
