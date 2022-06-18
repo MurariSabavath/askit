@@ -1,26 +1,32 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { btnStyles } from "../../components/common/Button/styled";
 
 export const Container = styled.div`
   max-width: 700px;
   margin: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 
-  h3 {
-    margin: 0;
-    padding: 0;
+  @media (max-width: 600px) {
+    margin-inline: 20px;
   }
 `;
 
-export const PostLink = styled(Link)`
-  ${btnStyles};
-  color: ${({ theme }) => theme.specialText};
-  width: fit-content;
-  padding-inline: 20px;
-  font-size: 14px;
-  text-decoration: none;
-  margin: 0;
+export const DetailsRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: ${({ direction }) => direction};
+  margin-bottom: 100px;
+  gap: 20px;
+
+  h1 {
+    font-size: 2.5rem;
+    margin: 0;
+  }
+
+  h2 {
+    margin-top: 10px;
+  }
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
 `;

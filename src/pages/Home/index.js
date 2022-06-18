@@ -1,25 +1,24 @@
-import axios from "axios";
-import { useEffect } from "react";
-import { Container, PostLink } from "./styled";
+import { Container, DetailsRow } from "./styled";
+import ask_questions from "../../assets/ask_questions.svg";
+import publish_article from "../../assets/publish_article.svg";
 
 const Home = () => {
-  useEffect(() => {
-    const access_token = JSON.parse(localStorage.getItem("access_token"));
-
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/posts/1/1`, {
-        headers: { "x-auth-token": access_token },
-      })
-      .then((resp) => {
-        console.log(resp);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
   return (
     <Container>
-      <h3>Top Questions</h3>
-      <PostLink to="/question/ask">Want to Ask</PostLink>
+      <DetailsRow direction="row">
+        <img src={ask_questions} alt="ask questions" width="40%" />
+        <div>
+          <h1>Stuck while coding</h1>
+          <h2>Clear your doubts and other developer`s doubts</h2>
+        </div>
+      </DetailsRow>
+      <DetailsRow direction="row-reverse">
+        <img src={publish_article} alt="post article" width="40%" />
+        <div>
+          <h1>Wanna post your article</h1>
+          <h2>Share your thoughts and knowledge</h2>
+        </div>
+      </DetailsRow>
     </Container>
   );
 };

@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import Switch from "react-switch";
 import { FiSearch, FiChevronDown } from "react-icons/fi";
+import { useTheme } from "styled-components";
+import axios from "axios";
+import Switch from "react-switch";
 import Button from "../common/Button";
 import Input from "../common/Input";
 import {
   DropDownElement,
-  DropDownLink,
   DropDownLinkContainer,
   GridOne,
   GridThree,
@@ -18,8 +19,6 @@ import {
   ResultCard,
   ResultContainer,
 } from "./styled";
-import axios from "axios";
-import { useTheme } from "styled-components";
 
 const Header = ({ theme, setTheme }) => {
   const themeContext = useTheme();
