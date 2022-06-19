@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "../pages/Home";
 import Register from "../pages/Auth/Register";
+import ForgotPassword from "../pages/Auth/ForgotPassword";
 import Login from "../pages/Auth/Login";
 import Redirect from "../pages/Auth/Redirect";
 import EmailVerification from "../pages/Auth/EmailVerification";
@@ -15,6 +16,7 @@ import ProtectedRoutes from "./ProtectedOutlet";
 import Posts from "../pages/Posts";
 import IndividualPost from "../pages/IndividualPost";
 import QuestionEdit from "../pages/QuestionEdit";
+import ResetPassword from "../pages/Auth/ResetPassword";
 
 const AppRouter = ({ theme, setTheme }) => {
   return (
@@ -29,6 +31,8 @@ const AppRouter = ({ theme, setTheme }) => {
             element={<InvalidEmailVerification />}
           />
           <Route path="register" element={<Register />} />
+          <Route path="forgotpassword" element={<ForgotPassword/>} />
+          <Route path="resetpassword/:token" element={<ResetPassword/>} />
         </Route>
         <Route
           path="/"
