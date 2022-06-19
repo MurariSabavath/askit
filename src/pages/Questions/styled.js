@@ -86,7 +86,7 @@ export const DetailsRow = styled.div`
 `;
 
 export const PostTime = styled.p`
-  color: ${({ theme }) => theme.specialText};
+  color: ${({ theme }) => theme.textSoft};
   font-size: 10px;
-  padding-left: 12px;
+  padding-left: 16px;
 `;

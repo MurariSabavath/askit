@@ -16,7 +16,7 @@ const QuestionPost = () => {
   const [tags, setTags] = useState([]);
   const navigate = useNavigate();
   const { mutate } = useMutation(
-    () => apiInstance.post("/posts/add", { title, data: postBody, tags }),
+    () => apiInstance.post("/questions/add", { title, data: postBody, tags }),
     {
       onSuccess: () => {
         toast.success("Your question has been posted successfully");

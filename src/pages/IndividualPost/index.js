@@ -10,7 +10,7 @@ import Loading from "../../components/common/Loading";
 const IndividualPost = () => {
   const { id } = useParams();
   const { data, isLoading, isError } = useQuery(`post-${id}`, () =>
-    apiInstance.get(`/posts/post/${id}`),
+    apiInstance.get(`/questions/question/${id}`),
   );
 
   if (isLoading) {
@@ -22,10 +22,10 @@ const IndividualPost = () => {
   }
   return (
     <Container>
-      <h1>{data.data.post.title}</h1>
+      <h1>{data.data.question.title}</h1>
       <ReactMarkdown
         components={SyntaxHighlightForMarkdown}
-        children={data.data.post.data}
+        children={data.data.question.data}
       />
       <Link to={`/posts/post/edit/${id}`}>Edit</Link>
     </Container>
