@@ -14,7 +14,7 @@ import EmailVerification from "../pages/Auth/EmailVerification";
 import InvalidEmailVerification from "../pages/Auth/InvalidEmailVerification";
 import Profile from "../pages/Profile";
 import QuestionPost from "../pages/QuestionPost";
-import IndividualPost from "../pages/IndividualPost";
+import Question from "../pages/Question";
 import QuestionEdit from "../pages/QuestionEdit";
 import Questions from "../pages/Questions";
 
@@ -38,7 +38,7 @@ const AppRouter = ({ theme, setTheme }) => {
         >
           <Route path="/" element={<Home />} />
           <Route path="/questions" element={<Questions />} />
-          <Route path="/questions/question/:id" element={<IndividualPost />} />
+          <Route path="/questions/question/:id" element={<Question />} />
           <Route path="/questions/edit/:id" element={<QuestionEdit />} />
           <Route element={<ProtectedRoutes />}>
             <Route path="/user/profile" element={<Profile />} />
