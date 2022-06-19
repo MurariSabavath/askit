@@ -4,23 +4,30 @@ import rehypeSanitize from "rehype-sanitize";
 import { toast } from "react-toastify";
 import { useMutation } from "react-query";
 import { useState } from "react";
-import { BtnContainer, Container, InputContainer } from "./styled";
+import { useNavigate } from "react-router-dom";
+import { useTheme } from "styled-components";
+import {
+  BtnContainer,
+  Container,
+  InputContainer,
+  MultiContainerContainer,
+} from "./styled";
 import { apiInstance } from "../../services/axiosInstance";
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
-import { useNavigate } from "react-router-dom";
 
 const QuestionPost = () => {
   const [postBody, setPostBody] = useState("");
   const [title, setTitle] = useState("");
   const [tags, setTags] = useState([]);
+  const theme = useTheme();
   const navigate = useNavigate();
   const { mutate } = useMutation(
     () => apiInstance.post("/questions/add", { title, data: postBody, tags }),
     {
       onSuccess: () => {
         toast.success("Your question has been posted successfully");
-        navigate("/");
+        navigate("/questions");
       },
       onError: (error) => toast.error(error.response.data.error),
     },
@@ -50,18 +57,29 @@ const QuestionPost = () => {
           source={postBody}
           rehypePlugins={[[rehypeSanitize]]}
         />
-        <Multiselect
-          isObject={false}
-          onSelect={(selectedList) => setTags(selectedList)}
-          loading={false}
-          options={["Python", "Javascript", "HTML", "CSS", "Typescript"]}
-          style={{
-            searchBox: {
-              padding: "10px",
-              marginTop: "20px",
-            },
-          }}
-        />
+        <MultiContainerContainer>
+          <Multiselect
+            isObject={false}
+            onSelect={(selectedList) => setTags(selectedList)}
+            loading={false}
+            options={["Python", "Javascript", "HTML", "CSS", "Typescript"]}
+            style={{
+              searchBox: {
+                padding: "10px",
+                marginTop: "20px",
+                background: theme.inputContrast,
+              },
+              chips: {
+                background: theme.specialBg,
+              },
+              optionContainer: {
+                background: theme.bg,
+              },
+            }}
+            closeIcon="cancel"
+          />
+        </MultiContainerContainer>
+
         <BtnContainer>
           <Button
             handleClick={(e) => {

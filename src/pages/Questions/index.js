@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../components/common/Loading";
@@ -9,6 +9,7 @@ import {
   ContainerRow,
   DetailsRow,
   MainContainer,
+  Pagination,
   PostBody,
   PostContainerRow,
   PostLink,
@@ -18,9 +19,36 @@ import {
 
 const Questions = () => {
   const navigate = useNavigate();
-  const { data, isLoading, isError } = useQuery("questions", () =>
-    apiInstance.get("/questions/3/1"),
+  const [pagination, setPagination] = useState({
+    perPage: 3,
+    totalPages: 0,
+    currentPage: 0,
+  });
+  const { data, isLoading, isError, refetch } = useQuery("questions", () =>
+    apiInstance.get(
+      `/questions/${pagination.perPage}/${pagination.currentPage + 1}`,
+    ),
   );
+
+  const handlePageChange = (event) => {
+    console.log(event.selected);
+    setPagination({ ...pagination, currentPage: event.selected });
+  };
+
+  useEffect(() => {
+    refetch();
+  }, [pagination.currentPage, refetch]);
+
+  useEffect(() => {
+    if (data?.data?.totalquestions) {
+      setPagination({
+        ...pagination,
+        totalPages: Math.ceil(
+          parseInt(data?.data?.totalquestions) / pagination.perPage,
+        ),
+      });
+    }
+  }, [data]);
 
   if (isLoading) {
     return <Loading>Loading...</Loading>;
@@ -58,6 +86,11 @@ const Questions = () => {
           );
         })}
       </PostContainerRow>
+      <Pagination
+        pageCount={pagination.totalPages}
+        forcePage={pagination.currentPage}
+        onPageChange={handlePageChange}
+      />
     </MainContainer>
   );
 };

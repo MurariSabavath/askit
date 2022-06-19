@@ -1,3 +1,4 @@
+import ReactPaginate from "react-paginate";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { btnStyles } from "../../components/common/Button/styled";
@@ -89,4 +90,38 @@ export const PostTime = styled.p`
   color: ${({ theme }) => theme.textSoft};
   font-size: 10px;
   padding-left: 16px;
+`;
+
+export const Pagination = styled(ReactPaginate).attrs({
+  activeClassName: "active",
+})`
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  list-style-type: none;
+  li a {
+    border-radius: 7px;
+    padding: 0.1rem 1rem;
+    border: gray 1px solid;
+    cursor: pointer;
+  }
+  li.previous a,
+  li.next a,
+  li.break a {
+    border-color: transparent;
+  }
+  li.active a {
+    background-color: ${({ theme }) => theme.specialBg};
+    border-color: transparent;
+    color: white;
+    min-width: 32px;
+  }
+  li.disabled a {
+    color: grey;
+  }
+  li.disable,
+  li.disabled a {
+    cursor: default;
+  }
 `;
