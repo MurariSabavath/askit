@@ -16,10 +16,10 @@ import {
   TagContainer,
 } from "./styled";
 
-const Posts = () => {
+const Questions = () => {
   const navigate = useNavigate();
-  const { data, isLoading, isError } = useQuery("posts", () =>
-    apiInstance.get("/posts/10/1"),
+  const { data, isLoading, isError } = useQuery("questions", () =>
+    apiInstance.get("/questions/3/1"),
   );
 
   if (isLoading) {
@@ -33,13 +33,16 @@ const Posts = () => {
     <MainContainer>
       <ContainerRow>
         <h3>Most Recent Questions</h3>
-        <PostLink to="/question/ask">Want to Ask</PostLink>
+        <PostLink to="/questions/create">Want to Ask</PostLink>
       </ContainerRow>
       <PostContainerRow>
-        {data.data.posts.map(({ _id, title, tags, author, date }) => {
+        {data.data?.questions?.map(({ _id, title, tags, author, date }) => {
           const diff = duration(date);
           return (
-            <PostBody key={_id} onClick={() => navigate(`/posts/post/${_id}`)}>
+            <PostBody
+              key={_id}
+              onClick={() => navigate(`/questions/question/${_id}`)}
+            >
               <h1>{title}</h1>
               <TagContainer>
                 {tags.length > 0 &&
@@ -59,4 +62,4 @@ const Posts = () => {
   );
 };
 
-export default Posts;
+export default Questions;
