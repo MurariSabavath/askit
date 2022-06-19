@@ -8,6 +8,7 @@ import AuthOutlet from "./AuthOutlet";
 
 import Home from "../pages/Home";
 import Register from "../pages/Auth/Register";
+import ForgotPassword from "../pages/Auth/ForgotPassword";
 import Login from "../pages/Auth/Login";
 import Redirect from "../pages/Auth/Redirect";
 import EmailVerification from "../pages/Auth/EmailVerification";
@@ -16,6 +17,7 @@ import Profile from "../pages/Profile";
 import QuestionPost from "../pages/QuestionPost";
 import Question from "../pages/Question";
 import QuestionEdit from "../pages/QuestionEdit";
+import ResetPassword from "../pages/Auth/ResetPassword";
 import Questions from "../pages/Questions";
 
 const AppRouter = ({ theme, setTheme }) => {
@@ -31,6 +33,8 @@ const AppRouter = ({ theme, setTheme }) => {
             element={<InvalidEmailVerification />}
           />
           <Route path="register" element={<Register />} />
+          <Route path="forgotpassword" element={<ForgotPassword/>} />
+          <Route path="resetpassword/:token" element={<ResetPassword/>} />
         </Route>
         <Route
           path="/"

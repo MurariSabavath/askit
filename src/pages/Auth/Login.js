@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate} from "react-router-dom";
 import { useMutation } from "react-query";
 import Button from "../../components/common/Button";
 import Input from "../../components/common/Input";
@@ -18,7 +18,6 @@ import { apiInstance } from "../../services/axiosInstance";
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
-
   const { mutate } = useMutation(
     () => {
       return apiInstance.post("/users/login", formInputData);
@@ -84,7 +83,7 @@ const Login = () => {
       </BtnContainer>
       <BottomContainer>
         <p>
-          Forgot your <Link to="/register">Password</Link> ?
+          Forgot your <Link to="/forgotpassword">Password</Link> ?
         </p>
         <p>
           New to Askit ? <Link to="/register">Sign Up</Link>

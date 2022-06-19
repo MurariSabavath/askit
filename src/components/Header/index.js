@@ -7,6 +7,7 @@ import axios from "axios";
 import Switch from "react-switch";
 import Button from "../common/Button";
 import Input from "../common/Input";
+import {ReactComponent as Menu} from '../../assets/whitemenu.svg';
 import {
   DropDownElement,
   DropDownLinkContainer,
