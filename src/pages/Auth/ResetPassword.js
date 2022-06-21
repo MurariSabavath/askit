@@ -34,8 +34,8 @@ const ResetPassword = () => {
       });
     },
     {
-      onSuccess: (data) => {
-        toast.success(console.log("Password reset successfull!"));
+      onSuccess: () => {
+        toast.success("Password reset successfull!");
         navigate("/login");
       },
       onError: (error) => toast.error(error.response.data.error),
