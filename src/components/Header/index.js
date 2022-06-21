@@ -7,7 +7,6 @@ import axios from "axios";
 import Switch from "react-switch";
 import Button from "../common/Button";
 import Input from "../common/Input";
-import {ReactComponent as Menu} from '../../assets/whitemenu.svg';
 import {
   DropDownElement,
   DropDownLinkContainer,
@@ -64,7 +63,7 @@ const Header = ({ theme, setTheme }) => {
     const access_token = JSON.parse(localStorage.getItem("access_token"));
     if (access_token) {
       axios
-        .get(`${process.env.REACT_APP_API_URL}/users/me`, {
+        .get(`${process.env.REACT_APP_API_URL}/users/get/me`, {
           headers: { "x-auth-token": access_token },
         })
         .then((resp) => {

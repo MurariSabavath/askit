@@ -13,7 +13,7 @@ import Button from "../../components/common/Button";
 const Question = () => {
   const { id } = useParams();
   const { data, isLoading, isError } = useQuery(`post-${id}`, () =>
-    apiInstance.get(`/questions/question/${id}`),
+    apiInstance.get(`/questions/get/${id}`),
   );
 
   const { mutate: postUserComment } = useMutation(

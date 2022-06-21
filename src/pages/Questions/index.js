@@ -26,7 +26,7 @@ const Questions = () => {
   });
   const { data, isLoading, isError, refetch } = useQuery("questions", () =>
     apiInstance.get(
-      `/questions/${pagination.perPage}/${pagination.currentPage + 1}`,
+      `/questions/get/${pagination.perPage}/${pagination.currentPage + 1}`,
     ),
   );
 

@@ -141,7 +141,7 @@ export const DropDownLinkContainer = styled.div`
     width: 100%;
     text-decoration: none;
     background: ${({ theme }) => theme.specialBg};
-    color: ${({ theme }) => theme.text};
+    color: ${({ theme }) => theme.specialText};
 
     &:hover {
       background: ${({ theme }) => theme.specialBgContrast};
