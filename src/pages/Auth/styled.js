@@ -31,6 +31,12 @@ export const BtnContainer = styled.div`
   }
 `;
 
+export const VerifiedBtn = styled(BtnContainer)`
+  button {
+    width: max-content;
+  }
+`;
+
 export const Title = styled.h1`
   font-size: 18px;
   font-weight: 500;

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { Link, useLocation, useNavigate} from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 import Button from "../../components/common/Button";
 import Input from "../../components/common/Input";
@@ -30,6 +30,7 @@ const Login = () => {
         if (from) {
           navigate(from);
         } else {
+          toast.success("Login successful");
           navigate("/");
         }
       },

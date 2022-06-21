@@ -1,10 +1,11 @@
-import Input from "../../components/common/Input";
+import { useState } from "react";
 import { toast } from "react-toastify";
-import Button from "../../components/common/Button";
-import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
+import { Link } from "react-router-dom";
+
+import Input from "../../components/common/Input";
+import Button from "../../components/common/Button";
 import { apiInstance, requestInterceptor } from "../../services/axiosInstance";
-import { useEffect, useState } from "react";
 import {
   BtnContainer,
   Container,
@@ -13,22 +14,20 @@ import {
   Title,
 } from "./styled";
 
-const ForgotPassword = ()=>{
-    const [email, setEmail] = useState('');
-    const handleInputChange=(e)=>{
-        setEmail(e.target.value);
-    }
+const ForgotPassword = () => {
+  const [email, setEmail] = useState("");
+  const handleInputChange = (e) => {
+    setEmail(e.target.value);
+  };
   const { mutate } = useMutation(
     () => {
       apiInstance.interceptors.request.eject(requestInterceptor);
-      return apiInstance.post("/users/forgot", {'email':email});
+      return apiInstance.post("/users/forgot", { email: email });
     },
     {
       onSuccess: (data) => {
-        console.log(data)
-        toast.success(
-            'email sent'
-        );
+        console.log(data);
+        toast.success("email sent");
       },
       onError: (error) => toast.error(error.response.data.error),
     },
@@ -38,7 +37,7 @@ const ForgotPassword = ()=>{
       <Title>Forgot Password</Title>
       <FormControl>
         <Input
-        value={email}
+          value={email}
           name="email"
           type="email"
           placeholder="email"
@@ -47,15 +46,15 @@ const ForgotPassword = ()=>{
         />
       </FormControl>
       <BtnContainer>
-        <Button handleClick={()=>mutate()}>Reset Password</Button>
+        <Button handleClick={() => mutate()}>Reset Password</Button>
       </BtnContainer>
       <BottomContainer>
         <p>
-          Already have an account ? <Link to="/login">Log In</Link>
+          Remember password ? <Link to="/login">Log In</Link>
         </p>
       </BottomContainer>
     </Container>
   );
-}
+};
 
 export default ForgotPassword;
