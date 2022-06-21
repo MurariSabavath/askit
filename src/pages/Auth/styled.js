@@ -28,6 +28,10 @@ export const BtnContainer = styled.div`
 
   button {
     ${btnStyles}
+    display: flex;
+    justify-content: center;
+
+    text-align: center;
   }
 `;
 

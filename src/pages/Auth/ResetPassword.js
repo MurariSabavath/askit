@@ -26,7 +26,7 @@ const ResetPassword = () => {
       [e.target.name]: e.target.value,
     });
   };
-  const { mutate } = useMutation(
+  const { mutate, isLoading } = useMutation(
     () => {
       apiInstance.interceptors.request.eject(requestInterceptor);
       return apiInstance.post(`/users/reset/${token}`, {
@@ -66,6 +66,12 @@ const ResetPassword = () => {
       </FormControl>
       <BtnContainer>
         <Button
+          disabled={
+            isLoading ||
+            pwd.confirmpassword.length === 0 ||
+            pwd.newpassword.length === 0 ||
+            pwd.confirmpassword !== pwd.newpassword
+          }
           handleClick={() => {
             pwd.confirmpassword === pwd.newpassword
               ? mutate()

@@ -18,7 +18,7 @@ import { apiInstance } from "../../services/axiosInstance";
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { mutate } = useMutation(
+  const { mutate, isLoading } = useMutation(
     () => {
       return apiInstance.post("/users/login", formInputData);
     },
@@ -80,8 +80,19 @@ const Login = () => {
         />
       </FormControl>
       <BtnContainer>
-        <Button handleClick={() => mutate()}>Login</Button>
+        <Button
+          handleClick={() => mutate()}
+          isLoading={isLoading}
+          disabled={
+            isLoading ||
+            formInputData.email.length === 0 ||
+            formInputData.password.length === 0
+          }
+        >
+          Login
+        </Button>
       </BtnContainer>
+
       <BottomContainer>
         <p>
           Forgot your <Link to="/forgotpassword">Password</Link> ?

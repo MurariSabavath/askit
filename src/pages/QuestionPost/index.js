@@ -22,7 +22,7 @@ const QuestionPost = () => {
   const [tags, setTags] = useState([]);
   const theme = useTheme();
   const navigate = useNavigate();
-  const { mutate } = useMutation(
+  const { mutate, isLoading } = useMutation(
     () => apiInstance.post("/questions/add", { title, data: postBody, tags }),
     {
       onSuccess: () => {
@@ -82,6 +82,7 @@ const QuestionPost = () => {
 
         <BtnContainer>
           <Button
+            disabled={isLoading || postBody.length === 0 || title.length === 0}
             handleClick={(e) => {
               e.preventDefault();
               console.log(title, postBody, tags);

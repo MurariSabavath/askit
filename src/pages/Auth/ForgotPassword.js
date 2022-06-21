@@ -19,7 +19,7 @@ const ForgotPassword = () => {
   const handleInputChange = (e) => {
     setEmail(e.target.value);
   };
-  const { mutate } = useMutation(
+  const { mutate, isLoading } = useMutation(
     () => {
       apiInstance.interceptors.request.eject(requestInterceptor);
       return apiInstance.post("/users/forgot", { email: email });
@@ -46,7 +46,12 @@ const ForgotPassword = () => {
         />
       </FormControl>
       <BtnContainer>
-        <Button handleClick={() => mutate()}>Reset Password</Button>
+        <Button
+          handleClick={() => mutate()}
+          disabled={isLoading || email.length === 0}
+        >
+          Reset Password
+        </Button>
       </BtnContainer>
       <BottomContainer>
         <p>

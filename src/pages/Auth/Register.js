@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useMutation } from "react-query";
 import Button from "../../components/common/Button";
@@ -17,7 +17,7 @@ import { apiInstance, requestInterceptor } from "../../services/axiosInstance";
 
 const Register = () => {
   const navigate = useNavigate();
-  const { mutate } = useMutation(
+  const { mutate, isLoading } = useMutation(
     () => {
       apiInstance.interceptors.request.eject(requestInterceptor);
       return apiInstance.post("/users/register", formInputData);
@@ -85,7 +85,18 @@ const Register = () => {
         />
       </FormControl>
       <BtnContainer>
-        <Button handleClick={() => mutate()}>Register</Button>
+        <Button
+          handleClick={() => mutate()}
+          isLoading={isLoading}
+          disabled={
+            isLoading ||
+            formInputData.email.length === 0 ||
+            formInputData.password.length === 0 ||
+            formInputData.name.length === 0
+          }
+        >
+          Login
+        </Button>
       </BtnContainer>
       <BottomContainer>
         <p>
