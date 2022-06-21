@@ -12,12 +12,14 @@ import {
   SocialAuth,
   Title,
   OrContainer,
+  PasswordShowBtn,
 } from "./styled";
 import { apiInstance } from "../../services/axiosInstance";
 
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [showPassword, setShowPassword] = useState(false);
   const { mutate, isLoading } = useMutation(
     () => {
       return apiInstance.post("/users/login", formInputData);
@@ -74,11 +76,16 @@ const Login = () => {
         <Input
           value={formInputData.password}
           name="password"
-          type="password"
+          type={showPassword ? "text" : "password"}
           placeholder="password"
           onChange={handleInputChange}
         />
       </FormControl>
+      <PasswordShowBtn>
+        <Button handleClick={() => setShowPassword(!showPassword)}>
+          {showPassword ? "Hide" : "Show"} Password
+        </Button>
+      </PasswordShowBtn>
       <BtnContainer>
         <Button
           handleClick={() => mutate()}

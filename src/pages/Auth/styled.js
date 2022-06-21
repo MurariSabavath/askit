@@ -113,3 +113,19 @@ export const OrContainer = styled.div`
     margin-right: -50%;
   }
 `;
+
+export const PasswordShowBtn = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  button {
+    ${btnStyles}
+    width: max-content;
+    font-size: 12px;
+    height: 20px;
+    text-align: center;
+    margin: 0;
+    padding: 0 10px;
+    margin-top: 5px;
+    border-radius: 2px;
+  }
+`;

@@ -11,11 +11,13 @@ import {
   BottomContainer,
   FormControl,
   Title,
+  PasswordShowBtn,
 } from "./styled";
 
 const ResetPassword = () => {
   const navigate = useNavigate();
   const { token } = useParams();
+  const [showPassword, setShowPassword] = useState(false);
   const [pwd, setpwd] = useState({
     newpassword: "",
     confirmpassword: "",
@@ -48,7 +50,7 @@ const ResetPassword = () => {
         <Input
           value={pwd.newpassword}
           name="newpassword"
-          type="password"
+          type={showPassword ? "text" : "password"}
           placeholder="new password"
           autoComplete="off"
           onChange={handleInputChange}
@@ -58,12 +60,17 @@ const ResetPassword = () => {
         <Input
           value={pwd.confirmpassword}
           name="confirmpassword"
-          type="password"
+          type={showPassword ? "text" : "password"}
           placeholder="confirm password "
           autoComplete="off"
           onChange={handleInputChange}
         />
       </FormControl>
+      <PasswordShowBtn>
+        <Button handleClick={() => setShowPassword(!showPassword)}>
+          {showPassword ? "Hide" : "Show"} Password
+        </Button>
+      </PasswordShowBtn>
       <BtnContainer>
         <Button
           disabled={
