@@ -19,6 +19,7 @@ import Question from "../pages/Question";
 import QuestionEdit from "../pages/QuestionEdit";
 import ResetPassword from "../pages/Auth/ResetPassword";
 import Questions from "../pages/Questions";
+import UserNotVerified from "../pages/Auth/UserNotVerified";
 
 const AppRouter = ({ theme, setTheme }) => {
   return (
@@ -33,8 +34,8 @@ const AppRouter = ({ theme, setTheme }) => {
             element={<InvalidEmailVerification />}
           />
           <Route path="register" element={<Register />} />
-          <Route path="forgotpassword" element={<ForgotPassword/>} />
-          <Route path="resetpassword/:token" element={<ResetPassword/>} />
+          <Route path="forgotpassword" element={<ForgotPassword />} />
+          <Route path="resetpassword/:token" element={<ResetPassword />} />
         </Route>
         <Route
           path="/"
@@ -46,6 +47,7 @@ const AppRouter = ({ theme, setTheme }) => {
           <Route path="/questions/edit/:id" element={<QuestionEdit />} />
           <Route element={<ProtectedRoutes />}>
             <Route path="/user/profile" element={<Profile />} />
+            <Route path="/user/not-verified" element={<UserNotVerified />} />
             <Route path="/questions/create" element={<QuestionPost />} />
           </Route>
         </Route>

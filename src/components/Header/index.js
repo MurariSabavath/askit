@@ -74,6 +74,12 @@ const Header = ({ theme, setTheme }) => {
     }
   }, []);
 
+  useEffect(() => {
+    if (user !== null && !user.isVerified) {
+      navigate("/user/not-verified");
+    }
+  }, [user]);
+
   return (
     <HeaderContainer>
       <GridOne className="one">
