@@ -30,7 +30,7 @@ export const BtnContainer = styled.div`
     ${btnStyles}
     display: flex;
     justify-content: center;
-
+    width: 100%;
     text-align: center;
   }
 `;

@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 export const btnStyles = css`
-  width: 100%;
+  /* width: 100%; */
   box-sizing: border-box;
   font-size: 20px;
   display: block;

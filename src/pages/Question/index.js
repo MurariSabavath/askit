@@ -19,7 +19,9 @@ const Question = () => {
     isError,
     refetch,
     isFetching,
-  } = useQuery(`post-${id}`, () => apiInstance.get(`/questions/get/${id}`));
+  } = useQuery(`post-${id}`, () => apiInstance.get(`/questions/get/${id}`), {
+    refetchOnWindowFocus: false,
+  });
 
   const { mutate: postUserComment, isLoading: postingComment } = useMutation(
     () =>
@@ -61,7 +63,7 @@ const Question = () => {
       </ButtonContainer>
       <>
         {data.data.comments.map((comment) => (
-          <Comment key={comment._id} comment = {comment}/>
+          <Comment key={comment._id} comment={comment} />
         ))}
       </>
       <>{isFetching && <h1>Fetching</h1>}</>
