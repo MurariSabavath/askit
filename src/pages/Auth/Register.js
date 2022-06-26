@@ -12,15 +12,21 @@ import {
   SocialAuth,
   Title,
   OrContainer,
+  PasswordShowBtn,
 } from "./styled";
 import { apiInstance, requestInterceptor } from "../../services/axiosInstance";
 
 const Register = () => {
   const navigate = useNavigate();
-  const { mutate } = useMutation(
+  const [showPassword, setShowPassword] = useState(false);
+  const { mutate, isLoading } = useMutation(
     () => {
       apiInstance.interceptors.request.eject(requestInterceptor);
-      return apiInstance.post("/users/register", formInputData);
+      return apiInstance.post("/users/register", {
+        name: formInputData.name,
+        email: formInputData.email,
+        password: formInputData.password,
+      });
     },
     {
       onSuccess: () => {
@@ -37,6 +43,7 @@ const Register = () => {
     name: "",
     email: "",
     password: "",
+    confirmPassword: "",
   });
 
   const handleInputChange = (e) => {
@@ -78,14 +85,40 @@ const Register = () => {
       <FormControl>
         <Input
           name="password"
-          type="password"
+          type={showPassword ? "text" : "password"}
           placeholder="password"
           autoComplete="off"
           onChange={handleInputChange}
         />
       </FormControl>
+      <FormControl>
+        <Input
+          name="confirmPassword"
+          type={showPassword ? "text" : "password"}
+          placeholder="confirm password"
+          autoComplete="off"
+          onChange={handleInputChange}
+        />
+      </FormControl>
+      <PasswordShowBtn>
+        <Button handleClick={() => setShowPassword(!showPassword)}>
+          {showPassword ? "Hide" : "Show"} Password
+        </Button>
+      </PasswordShowBtn>
       <BtnContainer>
-        <Button handleClick={() => mutate()}>Register</Button>
+        <Button
+          handleClick={() => mutate()}
+          isLoading={isLoading}
+          disabled={
+            isLoading ||
+            formInputData.email.length === 0 ||
+            formInputData.password.length === 0 ||
+            formInputData.name.length === 0 ||
+            formInputData.password !== formInputData.confirmPassword
+          }
+        >
+          Sign Up
+        </Button>
       </BtnContainer>
       <BottomContainer>
         <p>

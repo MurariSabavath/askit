@@ -1,8 +1,11 @@
-const Button = ({ children, handleClick }) => {
+import { ThreeDots } from "react-loader-spinner";
+import { MainBtn } from "./styled";
+
+const Button = ({ children, handleClick, isLoading, disabled }) => {
   return (
-    <button type="submit" onClick={handleClick}>
-      {children}
-    </button>
+    <MainBtn type="submit" onClick={handleClick} disabled={disabled}>
+      {isLoading ? <ThreeDots height={25} color="#ffffff" /> : <>{children}</>}
+    </MainBtn>
   );
 };
 

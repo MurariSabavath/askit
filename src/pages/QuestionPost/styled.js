@@ -32,3 +32,11 @@ export const BtnContainer = styled.div`
     display: inline-block;
   }
 `;
+
+export const MultiContainerContainer = styled.div`
+  .optionContainer li:hover,
+  .optionContainer .highlight {
+    background: ${({ theme }) => theme.specialBg};
+    color: ${({ theme }) => theme.text};
+  }
+`;

@@ -1,6 +1,5 @@
-import styled from "styled-components/macro";
 import { Link } from "react-router-dom";
-import { btnStyles } from "../common/Button/styled";
+import styled, { css } from "styled-components/macro";
 import { inputStyle } from "../common/Input/styled";
 
 export const HeaderContainer = styled.nav`
@@ -32,6 +31,8 @@ export const HeaderContainer = styled.nav`
 
 export const GridOne = styled.div`
   grid-area: one;
+  width: 100%;
+
   a {
     font-size: medium;
     text-decoration: none;
@@ -48,30 +49,21 @@ export const GridTwo = styled.div`
 
 export const GridThree = styled.div`
   grid-area: three;
+  display: flex;
+  justify-content: flex-end;
   position: relative;
-  border: 1px solid ${({ theme }) => theme.text};
-  max-width: 250px;
   width: 100%;
-  height: 48px;
-  border-radius: 5px;
-  padding-inline: 10px;
-  cursor: pointer;
-
-  & > div {
-    min-width: 200px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  &:hover {
-    border: 1px solid ${({ theme }) => theme.outline};
+  svg {
+    fill: ${({ theme }) => theme.text};
+    color: ${({ theme }) => theme.text};
+    cursor: pointer;
   }
 `;
 
 export const ResultContainer = styled.div`
   position: absolute;
   background: ${({ theme }) => theme.bg};
+  padding-block: 10px;
   width: 100%;
   z-index: 1;
   box-shadow: 0px 5px 13px 0px ${({ theme }) => theme.shadow};
@@ -112,14 +104,15 @@ export const InputContianer = styled.div`
 `;
 
 export const ProfileDropdown = styled(ResultContainer)`
-  left: 0;
+  right: 0;
+  top: 70px;
   border-radius: 5px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  max-width: 200px;
 
   button {
-    ${btnStyles}
     display: block;
     border-radius: 0;
     font-size: 14px;
@@ -132,20 +125,38 @@ export const ProfileDropdown = styled(ResultContainer)`
   }
 `;
 
-export const DropDownLinkContainer = styled.div`
-  width: 100%;
-  & > a {
-    padding: 10px;
-    text-align: left;
-    display: block;
-    width: 100%;
-    text-decoration: none;
-    background: ${({ theme }) => theme.specialBg};
-    color: ${({ theme }) => theme.text};
+export const dropDownStyles = css`
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: ${({ theme }) => theme.text};
+  margin-inline: 5px;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
 
-    &:hover {
-      background: ${({ theme }) => theme.specialBgContrast};
-    }
+  p {
+    margin: 0;
+    margin-left: 5px;
+    white-space: nowrap;
+  }
+
+  &:hover {
+    background: ${({ theme }) => theme.hoverBg};
+  }
+`;
+
+export const DropDownLinkContainer = styled(Link)`
+  ${dropDownStyles}
+`;
+
+export const DropdownBtn = styled.div`
+  ${dropDownStyles}
+
+  div {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
   }
 `;
 
@@ -155,4 +166,33 @@ export const DropDownElement = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
+
+export const ProfileBox = styled.div`
+  display: flex;
+  margin: 15px;
+  align-items: center;
+  svg {
+    background: ${({ theme }) => theme.specialBgContrast};
+    stroke: #fff;
+    color: #fff;
+    padding: 5px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+  }
+
+  p {
+    margin: 0;
+    margin-left: 10px;
+  }
+`;
+
+export const Line = styled.div`
+  height: 0.5px;
+  width: 85%;
+  margin: auto;
+  margin-block: 10px;
+  border-radius: 1px;
+  background: ${({ theme }) => theme.borderContrast};
 `;

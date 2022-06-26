@@ -1,35 +1,40 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { FiSearch, FiChevronDown } from "react-icons/fi";
+import { FiSearch, FiLogOut } from "react-icons/fi";
+import { MdOutlineClose } from "react-icons/md";
+import { HiMenu, HiOutlineMoon } from "react-icons/hi";
+import { AiOutlineQuestionCircle } from "react-icons/ai";
+import { RiUser3Line } from "react-icons/ri";
 import { useTheme } from "styled-components";
 import axios from "axios";
 import Switch from "react-switch";
-import Button from "../common/Button";
 import Input from "../common/Input";
 import {
-  DropDownElement,
+  DropdownBtn,
   DropDownLinkContainer,
   GridOne,
   GridThree,
   GridTwo,
   HeaderContainer,
   InputContianer,
+  Line,
+  ProfileBox,
   ProfileDropdown,
   ResultCard,
   ResultContainer,
 } from "./styled";
 
 const Header = ({ theme, setTheme }) => {
-  const themeContext = useTheme();
   const navigate = useNavigate();
+  const themeContext = useTheme();
   const [showResults, setShowResults] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const [user, setUser] = useState(null);
   const [search, setSearch] = useState("");
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  const handleClick = () => {
+  const handleLogout = () => {
     localStorage.clear();
     toast.success("Logout success!");
     navigate("/login");
@@ -50,20 +55,12 @@ const Header = ({ theme, setTheme }) => {
     setShowResults(false);
   };
 
-  const handleDropdownClick = () => {
-    if (user === null) {
-      navigate("/login");
-    } else {
-      setShowDropdown(!showDropdown);
-    }
-  };
-
   useEffect(() => {
     setIsDarkMode(theme === "dark");
     const access_token = JSON.parse(localStorage.getItem("access_token"));
     if (access_token) {
       axios
-        .get(`${process.env.REACT_APP_API_URL}/users/me`, {
+        .get(`${process.env.REACT_APP_API_URL}/users/get/me`, {
           headers: { "x-auth-token": access_token },
         })
         .then((resp) => {
@@ -73,6 +70,12 @@ const Header = ({ theme, setTheme }) => {
         .catch((err) => console.log(err));
     }
   }, []);
+
+  useEffect(() => {
+    if (user !== null && !user.isVerified) {
+      navigate("/user/not-verified");
+    }
+  }, [user]);
 
   return (
     <HeaderContainer>
@@ -100,35 +103,60 @@ const Header = ({ theme, setTheme }) => {
         )}
       </GridTwo>
       <GridThree className="three">
-        <div onClick={handleDropdownClick}>
-          <p>{user === null ? "Login" : user?.name}</p>
-          {user !== null && <FiChevronDown fill={themeContext.input} />}
-        </div>
-        {showDropdown && user !== null && (
-          <ProfileDropdown>
-            <DropDownLinkContainer>
-              <Link to="/user/profile">Profile</Link>
-            </DropDownLinkContainer>
-            <Button handleClick={handleClick}>Logout</Button>
-            <DropDownElement>
-              <div>Dark mode</div>
-              <div>
-                <Switch
-                  onChange={(value) => {
-                    toggleTheme();
-                    setIsDarkMode(value);
-                  }}
-                  onColor={themeContext.specialBg}
-                  offColor={themeContext.dark}
-                  checked={isDarkMode}
-                  uncheckedIcon={false}
-                  checkedIcon={false}
-                />
-              </div>
-            </DropDownElement>
-          </ProfileDropdown>
+        {showDropdown ? (
+          <MdOutlineClose
+            size={25}
+            onClick={() => setShowDropdown(!showDropdown)}
+          />
+        ) : (
+          <HiMenu size={25} onClick={() => setShowDropdown(!showDropdown)} />
         )}
       </GridThree>
+      {showDropdown && (
+        <ProfileDropdown>
+          <ProfileBox>
+            <RiUser3Line size={25} />
+            <p>{user?.name}</p>
+          </ProfileBox>
+          <Line />
+          <DropDownLinkContainer to="/user/profile">
+            <RiUser3Line size={18} />
+            <p>Profile</p>
+          </DropDownLinkContainer>
+          <DropDownLinkContainer to="/questions">
+            <AiOutlineQuestionCircle size={18} />
+            <p>Questions</p>
+          </DropDownLinkContainer>
+          <Line />
+
+          <DropdownBtn>
+            <div>
+              <HiOutlineMoon size={18} />
+              <p>Dark mode</p>
+            </div>
+            <div style={{ marginLeft: "30px" }}>
+              <Switch
+                onChange={(value) => {
+                  toggleTheme();
+                  setIsDarkMode(value);
+                }}
+                height={20}
+                width={40}
+                onColor={themeContext.specialBg}
+                offColor={themeContext.dark}
+                checked={isDarkMode}
+                uncheckedIcon={false}
+                checkedIcon={false}
+              />
+            </div>
+          </DropdownBtn>
+          <Line />
+          <DropdownBtn onClick={handleLogout}>
+            <FiLogOut size={18} />
+            <p>Logout</p>
+          </DropdownBtn>
+        </ProfileDropdown>
+      )}
     </HeaderContainer>
   );
 };

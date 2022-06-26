@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../components/common/Loading";
@@ -9,6 +9,7 @@ import {
   ContainerRow,
   DetailsRow,
   MainContainer,
+  Pagination,
   PostBody,
   PostContainerRow,
   PostLink,
@@ -16,11 +17,38 @@ import {
   TagContainer,
 } from "./styled";
 
-const Posts = () => {
+const Questions = () => {
   const navigate = useNavigate();
-  const { data, isLoading, isError } = useQuery("posts", () =>
-    apiInstance.get("/posts/10/1"),
+  const [pagination, setPagination] = useState({
+    perPage: 3,
+    totalPages: 0,
+    currentPage: 0,
+  });
+  const { data, isLoading, isError, refetch } = useQuery("questions", () =>
+    apiInstance.get(
+      `/questions/get/${pagination.perPage}/${pagination.currentPage + 1}`,
+    ),
   );
+
+  const handlePageChange = (event) => {
+    console.log(event.selected);
+    setPagination({ ...pagination, currentPage: event.selected });
+  };
+
+  useEffect(() => {
+    refetch();
+  }, [pagination.currentPage, refetch]);
+
+  useEffect(() => {
+    if (data?.data?.totalquestions) {
+      setPagination({
+        ...pagination,
+        totalPages: Math.ceil(
+          parseInt(data?.data?.totalquestions) / pagination.perPage,
+        ),
+      });
+    }
+  }, [data]);
 
   if (isLoading) {
     return <Loading>Loading...</Loading>;
@@ -33,13 +61,16 @@ const Posts = () => {
     <MainContainer>
       <ContainerRow>
         <h3>Most Recent Questions</h3>
-        <PostLink to="/question/ask">Want to Ask</PostLink>
+        <PostLink to="/questions/create">Want to Ask</PostLink>
       </ContainerRow>
       <PostContainerRow>
-        {data.data.posts.map(({ _id, title, tags, author, date }) => {
+        {data.data?.questions?.map(({ _id, title, tags, author, date }) => {
           const diff = duration(date);
           return (
-            <PostBody key={_id} onClick={() => navigate(`/posts/post/${_id}`)}>
+            <PostBody
+              key={_id}
+              onClick={() => navigate(`/questions/question/${_id}`)}
+            >
               <h1>{title}</h1>
               <TagContainer>
                 {tags.length > 0 &&
@@ -55,8 +86,13 @@ const Posts = () => {
           );
         })}
       </PostContainerRow>
+      <Pagination
+        pageCount={pagination.totalPages}
+        forcePage={pagination.currentPage}
+        onPageChange={handlePageChange}
+      />
     </MainContainer>
   );
 };
 
-export default Posts;
+export default Questions;

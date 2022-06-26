@@ -12,14 +12,15 @@ import {
   SocialAuth,
   Title,
   OrContainer,
+  PasswordShowBtn,
 } from "./styled";
 import { apiInstance } from "../../services/axiosInstance";
 
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
-
-  const { mutate } = useMutation(
+  const [showPassword, setShowPassword] = useState(false);
+  const { mutate, isLoading } = useMutation(
     () => {
       return apiInstance.post("/users/login", formInputData);
     },
@@ -31,6 +32,7 @@ const Login = () => {
         if (from) {
           navigate(from);
         } else {
+          toast.success("Login successful");
           navigate("/");
         }
       },
@@ -74,17 +76,33 @@ const Login = () => {
         <Input
           value={formInputData.password}
           name="password"
-          type="password"
+          type={showPassword ? "text" : "password"}
           placeholder="password"
           onChange={handleInputChange}
         />
       </FormControl>
+      <PasswordShowBtn>
+        <Button handleClick={() => setShowPassword(!showPassword)}>
+          {showPassword ? "Hide" : "Show"} Password
+        </Button>
+      </PasswordShowBtn>
       <BtnContainer>
-        <Button handleClick={() => mutate()}>Login</Button>
+        <Button
+          handleClick={() => mutate()}
+          isLoading={isLoading}
+          disabled={
+            isLoading ||
+            formInputData.email.length === 0 ||
+            formInputData.password.length === 0
+          }
+        >
+          Login
+        </Button>
       </BtnContainer>
+
       <BottomContainer>
         <p>
-          Forgot your <Link to="/register">Password</Link> ?
+          Forgot your <Link to="/forgotpassword">Password</Link> ?
         </p>
         <p>
           New to Askit ? <Link to="/register">Sign Up</Link>

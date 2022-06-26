@@ -1,4 +1,4 @@
-import { css } from "styled-components";
+import styled, { css } from "styled-components";
 
 export const btnStyles = css`
   width: 100%;
@@ -12,10 +12,13 @@ export const btnStyles = css`
   border-radius: 5px;
   outline: none;
   border: none;
-  cursor: pointer;
   margin-top: 5px;
 
   &:hover {
     background: ${({ theme }) => theme.special};
   }
+`;
+
+export const MainBtn = styled.button`
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
 `;

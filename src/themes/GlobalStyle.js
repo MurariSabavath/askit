@@ -50,6 +50,7 @@ export const lightTheme = {
   specialMarkContrast: "#ffffff29",
   lightContrast: "#fcf1f3",
   darkContrast: "#5d3f44",
+  hoverBg: "rgb(229, 229, 229)",
 };
 
 export const darkTheme = {
@@ -87,6 +88,7 @@ export const darkTheme = {
   specialMarkContrast: "#f1eeef29",
   lightContrast: "#f4dfe2",
   darkContrast: "#452f33",
+  hoverBg: "rgb(70, 70, 73)",
 };
 
 export default GlobalStyles;
