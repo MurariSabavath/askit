@@ -7,6 +7,7 @@ import { HiMenu, HiOutlineMoon } from "react-icons/hi";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { RiUser3Line } from "react-icons/ri";
 import { useTheme } from "styled-components";
+import { ClickAwayListener } from "@mui/base";
 import axios from "axios";
 import Switch from "react-switch";
 import {
@@ -82,49 +83,51 @@ const Header = ({ theme, setTheme }) => {
         )}
       </GridThree>
       {showDropdown && (
-        <ProfileDropdown>
-          <ProfileBox>
-            <RiUser3Line size={25} />
-            <p>{user?.name}</p>
-          </ProfileBox>
-          <Line />
-          <DropDownLinkContainer to="/user/profile">
-            <RiUser3Line size={18} />
-            <p>Profile</p>
-          </DropDownLinkContainer>
-          <DropDownLinkContainer to="/questions">
-            <AiOutlineQuestionCircle size={18} />
-            <p>Questions</p>
-          </DropDownLinkContainer>
-          <Line />
+        <ClickAwayListener onClickAway={() => setShowDropdown(false)}>
+          <ProfileDropdown>
+            <ProfileBox>
+              <RiUser3Line size={25} />
+              <p>{user?.name}</p>
+            </ProfileBox>
+            <Line />
+            <DropDownLinkContainer to="/user/profile">
+              <RiUser3Line size={18} />
+              <p>Profile</p>
+            </DropDownLinkContainer>
+            <DropDownLinkContainer to="/questions">
+              <AiOutlineQuestionCircle size={18} />
+              <p>Questions</p>
+            </DropDownLinkContainer>
+            <Line />
 
-          <DropdownBtn>
-            <div>
-              <HiOutlineMoon size={18} />
-              <p>Dark mode</p>
-            </div>
-            <div style={{ marginLeft: "30px" }}>
-              <Switch
-                onChange={(value) => {
-                  toggleTheme();
-                  setIsDarkMode(value);
-                }}
-                height={20}
-                width={40}
-                onColor={themeContext.specialBg}
-                offColor={themeContext.dark}
-                checked={isDarkMode}
-                uncheckedIcon={false}
-                checkedIcon={false}
-              />
-            </div>
-          </DropdownBtn>
-          <Line />
-          <DropdownBtn onClick={handleLogout}>
-            <FiLogOut size={18} />
-            <p>Logout</p>
-          </DropdownBtn>
-        </ProfileDropdown>
+            <DropdownBtn>
+              <div>
+                <HiOutlineMoon size={18} />
+                <p>Dark mode</p>
+              </div>
+              <div style={{ marginLeft: "30px" }}>
+                <Switch
+                  onChange={(value) => {
+                    toggleTheme();
+                    setIsDarkMode(value);
+                  }}
+                  height={20}
+                  width={40}
+                  onColor={themeContext.specialBg}
+                  offColor={themeContext.dark}
+                  checked={isDarkMode}
+                  uncheckedIcon={false}
+                  checkedIcon={false}
+                />
+              </div>
+            </DropdownBtn>
+            <Line />
+            <DropdownBtn onClick={handleLogout}>
+              <FiLogOut size={18} />
+              <p>Logout</p>
+            </DropdownBtn>
+          </ProfileDropdown>
+        </ClickAwayListener>
       )}
     </HeaderContainer>
   );
