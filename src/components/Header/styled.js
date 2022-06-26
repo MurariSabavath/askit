@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components/macro";
-import { inputStyle } from "../common/Input/styled";
 
 export const HeaderContainer = styled.nav`
   height: 70px;
@@ -8,7 +7,7 @@ export const HeaderContainer = styled.nav`
   top: 0;
   left: 0;
   width: 100%;
-  padding-inline: 10px;
+  padding-inline: 50px;
   z-index: 1;
   background: ${({ theme }) => theme.bg};
 
@@ -27,6 +26,10 @@ export const HeaderContainer = styled.nav`
   box-shadow: 5px 5px 7px -6px ${({ theme }) => theme.shadow};
   -webkit-box-shadow: 5px 5px 7px -6px ${({ theme }) => theme.shadow};
   -moz-box-shadow: 5px 5px 7px -6px ${({ theme }) => theme.shadow};
+
+  @media (max-width: 600px) {
+    padding-inline: 20px;
+  }
 `;
 
 export const GridOne = styled.div`

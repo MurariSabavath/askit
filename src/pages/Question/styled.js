@@ -16,13 +16,17 @@ export const Container = styled.section`
 
 export const ButtonContainer = styled.div`
   margin-top: 10px;
+  display: flex;
+  justify-content: flex-start;
+
   button {
-    max-width: max-content;
     ${btnStyles}
+    white-space: nowrap;
     font-size: 12px;
     margin: 0;
     padding-inline: 20px;
     margin-right: 10px;
+    max-width: max-content;
   }
 `;
 
