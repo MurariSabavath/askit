@@ -10,7 +10,7 @@ import Loading from "../../components/common/Loading";
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
 import Answer from "../../components/common/Answer";
-
+import Comment from "../../components/common/comment";
 const Question = () => {
   const { id } = useParams();
   const {
@@ -60,8 +60,8 @@ const Question = () => {
         <Button handleClick={() => console.log("clicked")}>Edit</Button>
       </ButtonContainer>
       <>
-        {data.data.comments.map(({ comment, _id }) => (
-          <p key={_id}>{comment}</p>
+        {data.data.comments.map((comment) => (
+          <Comment key={comment._id} comment = {comment}/>
         ))}
       </>
       <>{isFetching && <h1>Fetching</h1>}</>
