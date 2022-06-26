@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { FiSearch, FiLogOut } from "react-icons/fi";
+import { FiLogOut } from "react-icons/fi";
 import { MdOutlineClose } from "react-icons/md";
 import { HiMenu, HiOutlineMoon } from "react-icons/hi";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
@@ -9,7 +9,6 @@ import { RiUser3Line } from "react-icons/ri";
 import { useTheme } from "styled-components";
 import axios from "axios";
 import Switch from "react-switch";
-import Input from "../common/Input";
 import {
   DropdownBtn,
   DropDownLinkContainer,
@@ -17,21 +16,17 @@ import {
   GridThree,
   GridTwo,
   HeaderContainer,
-  InputContianer,
   Line,
   ProfileBox,
   ProfileDropdown,
-  ResultCard,
-  ResultContainer,
 } from "./styled";
+import Search from "../Search";
 
 const Header = ({ theme, setTheme }) => {
   const navigate = useNavigate();
   const themeContext = useTheme();
-  const [showResults, setShowResults] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const [user, setUser] = useState(null);
-  const [search, setSearch] = useState("");
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   const handleLogout = () => {
@@ -44,15 +39,6 @@ const Header = ({ theme, setTheme }) => {
     const updatedTheme = theme === "dark" ? "light" : "dark";
     setTheme(updatedTheme);
     localStorage.setItem("theme", updatedTheme);
-  };
-
-  const handleInputChange = (e) => {
-    setShowResults(true);
-    setSearch(e.target.value);
-  };
-
-  const onBlur = () => {
-    setShowResults(false);
   };
 
   useEffect(() => {
@@ -83,24 +69,7 @@ const Header = ({ theme, setTheme }) => {
         <Link to="/">ASKITO</Link>
       </GridOne>
       <GridTwo className="two">
-        <InputContianer>
-          <Input
-            value={search}
-            name="search"
-            type="text"
-            placeholder="Search Askito"
-            onChange={handleInputChange}
-            onBlur={onBlur}
-          />
-          <FiSearch size={25} fill={themeContext.input} />
-        </InputContianer>
-        {showResults && (
-          <ResultContainer>
-            <ResultCard>
-              Results for <span>{search}</span>
-            </ResultCard>
-          </ResultContainer>
-        )}
+        <Search />
       </GridTwo>
       <GridThree className="three">
         {showDropdown ? (

@@ -20,6 +20,9 @@ import QuestionEdit from "../pages/QuestionEdit";
 import ResetPassword from "../pages/Auth/ResetPassword";
 import Questions from "../pages/Questions";
 import UserNotVerified from "../pages/Auth/UserNotVerified";
+import UserProfile from "../pages/UserProfile";
+import Posts from "../pages/Posts";
+import Post from "../pages/Post";
 
 const AppRouter = ({ theme, setTheme }) => {
   return (
@@ -42,9 +45,12 @@ const AppRouter = ({ theme, setTheme }) => {
           element={<MainOutlet theme={theme} setTheme={setTheme} />}
         >
           <Route path="/" element={<Home />} />
+          <Route path="/profile/:id" element={<UserProfile />} />
           <Route path="/questions" element={<Questions />} />
           <Route path="/questions/question/:id" element={<Question />} />
           <Route path="/questions/edit/:id" element={<QuestionEdit />} />
+          <Route path="/posts" element={<Posts />} />
+          <Route path="/posts/post/:id" element={<Post />} />
           <Route element={<ProtectedRoutes />}>
             <Route path="/user/profile" element={<Profile />} />
             <Route path="/user/not-verified" element={<UserNotVerified />} />
