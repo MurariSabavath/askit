@@ -1,11 +1,9 @@
 import { Routes, Route } from "react-router-dom";
-
 import ProtectedRoutes from "./ProtectedOutlet";
 import CustomRouter from "./CustomRoute";
 import history from "../utils/history";
 import MainOutlet from "./MainOutlet";
 import AuthOutlet from "./AuthOutlet";
-
 import Home from "../pages/Home";
 import Register from "../pages/Auth/Register";
 import ForgotPassword from "../pages/Auth/ForgotPassword";

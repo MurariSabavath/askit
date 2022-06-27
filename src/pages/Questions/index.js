@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
-import Loading from "../../components/common/Loading";
 import { apiInstance } from "../../services/axiosInstance";
 import duration from "../../utils/duration";
+import Loading from "../../components/common/Loading";
 import {
   AuthorName,
   ContainerRow,
@@ -24,10 +24,19 @@ const Questions = () => {
     totalPages: 0,
     currentPage: 0,
   });
-  const { data, isLoading, isError, refetch } = useQuery("questions", () =>
-    apiInstance.get(
-      `/questions/get/${pagination.perPage}/${pagination.currentPage + 1}`,
-    ),
+  const {
+    data,
+    isLoading,
+    isError,
+    isFetching,
+    refetch,
+  } = useQuery(
+    "questions",
+    () =>
+      apiInstance.get(
+        `/questions/get/${pagination.perPage}/${pagination.currentPage + 1}`,
+      ),
+    { refetchOnWindowFocus: false },
   );
 
   const handlePageChange = (event) => {
@@ -86,6 +95,7 @@ const Questions = () => {
           );
         })}
       </PostContainerRow>
+      {isFetching && <Loading>Loading...</Loading>}
       <Pagination
         pageCount={pagination.totalPages}
         forcePage={pagination.currentPage}
