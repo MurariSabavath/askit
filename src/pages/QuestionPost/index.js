@@ -2,9 +2,9 @@ import { toast } from "react-toastify";
 import { useMutation } from "react-query";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { apiInstance } from "Services/axiosInstance";
+import QuestionForm from "Components/common/QuestionForm";
 import { Container } from "./styled";
-import { apiInstance } from "../../services/axiosInstance";
-import QuestionForm from "../../components/common/QuestionForm";
 
 const QuestionPost = () => {
   const [postBody, setPostBody] = useState("");

@@ -1,6 +1,6 @@
+import { btnStyles } from "Components/common/Button/styled";
+import { inputStyle } from "Components/common/Input/styled";
 import styled from "styled-components";
-import { btnStyles } from "../../components/common/Button/styled";
-import { inputStyle } from "../../components/common/Input/styled";
 
 export const Container = styled.div`
   max-width: 400px;

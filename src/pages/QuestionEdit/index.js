@@ -1,9 +1,9 @@
+import QuestionForm from "Components/common/QuestionForm";
 import { useEffect, useState } from "react";
 import { useMutation, useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import QuestionForm from "../../components/common/QuestionForm";
-import { apiInstance } from "../../services/axiosInstance";
+import { apiInstance } from "Services/axiosInstance";
 import { Container, Message } from "./styled";
 
 const QuestionEdit = () => {

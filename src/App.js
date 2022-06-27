@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { QueryClient, QueryClientProvider } from "react-query";
 import { ToastContainer } from "react-toastify";
+import { QueryClient, QueryClientProvider } from "react-query";
 import "react-toastify/dist/ReactToastify.css";
-import { ThemeProvider } from "styled-components";
 
-import AppRouter from "./routes/AppRoutes";
-import GlobalStyle, { darkTheme, lightTheme } from "./themes/GlobalStyle";
+import AppRouter from "Routes/AppRoutes";
+import { ThemeProvider } from "styled-components";
+import GlobalStyles, { darkTheme, lightTheme } from "Themes/GlobalStyle";
 
 const queryClient = new QueryClient();
 
@@ -28,7 +28,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
-        <GlobalStyle />
+        <GlobalStyles />
         <AppRouter theme={theme} setTheme={setTheme} />
         <ToastContainer position="bottom-left" />
       </ThemeProvider>

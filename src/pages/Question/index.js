@@ -3,14 +3,15 @@ import ReactMarkdown from "react-markdown";
 import { useMutation, useQuery } from "react-query";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
-import { apiInstance } from "../../services/axiosInstance";
+import { apiInstance } from "Services/axiosInstance";
+import Loading from "Components/common/Loading";
+import Button from "Components/common/Button";
+import Comment from "Components/common/comment";
+import Input from "Components/common/Input";
+import Answer from "Components/common/Answer";
 import { Container, BtnFlex, CommentInputBox, ButtonContainer } from "./styled";
 import SyntaxHighlightForMarkdown from "../SyntaxHighlighterForMarkdown";
-import Loading from "../../components/common/Loading";
-import Input from "../../components/common/Input";
-import Button from "../../components/common/Button";
-import Answer from "../../components/common/Answer";
-import Comment from "../../components/common/comment";
+
 const Question = () => {
   const { id } = useParams();
   const navigate = useNavigate();

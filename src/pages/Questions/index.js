@@ -1,9 +1,9 @@
+import Loading from "Components/common/Loading";
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { apiInstance } from "../../services/axiosInstance";
-import duration from "../../utils/duration";
-import Loading from "../../components/common/Loading";
+import { apiInstance } from "Services/axiosInstance";
+import duration from "Utils/duration";
 import {
   AuthorName,
   ContainerRow,

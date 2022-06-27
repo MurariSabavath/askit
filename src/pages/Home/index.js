@@ -1,6 +1,6 @@
 import { Container, DetailsRow } from "./styled";
-import ask_questions from "../../assets/ask_questions.svg";
-import publish_article from "../../assets/publish_article.svg";
+import ask_questions from "Assets/ask_questions.svg";
+import publish_article from "Assets/publish_article.svg";
 
 const Home = () => {
   return (
