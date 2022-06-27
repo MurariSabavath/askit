@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { useMutation, useQuery } from "react-query";
 import { toast } from "react-toastify";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { apiInstance } from "../../services/axiosInstance";
 import { Container, BtnFlex, CommentInputBox, ButtonContainer } from "./styled";
 import SyntaxHighlightForMarkdown from "../SyntaxHighlighterForMarkdown";
@@ -13,15 +13,14 @@ import Answer from "../../components/common/Answer";
 import Comment from "../../components/common/comment";
 const Question = () => {
   const { id } = useParams();
-  const {
-    data,
-    isLoading,
-    isError,
-    refetch,
-    isFetching,
-  } = useQuery(`post-${id}`, () => apiInstance.get(`/questions/get/${id}`), {
-    refetchOnWindowFocus: false,
-  });
+  const navigate = useNavigate();
+  const { data, isLoading, isError, refetch, isFetching } = useQuery(
+    `post-${id}`,
+    () => apiInstance.get(`/questions/get/${id}`),
+    {
+      refetchOnWindowFocus: false,
+    },
+  );
 
   const { mutate: postUserComment, isLoading: postingComment } = useMutation(
     () =>
@@ -59,7 +58,9 @@ const Question = () => {
         children={data.data.question.data}
       />
       <ButtonContainer>
-        <Button handleClick={() => console.log("clicked")}>Edit</Button>
+        <Button handleClick={() => navigate(`/questions/edit/${id}`)}>
+          Edit
+        </Button>
       </ButtonContainer>
       <>
         {data.data.comments.map((comment) => (

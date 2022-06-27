@@ -1,26 +1,15 @@
-import MDEditor from "@uiw/react-md-editor";
-import Multiselect from "multiselect-react-dropdown";
-import rehypeSanitize from "rehype-sanitize";
 import { toast } from "react-toastify";
 import { useMutation } from "react-query";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useTheme } from "styled-components";
-import {
-  BtnContainer,
-  Container,
-  InputContainer,
-  MultiContainerContainer,
-} from "./styled";
+import { Container } from "./styled";
 import { apiInstance } from "../../services/axiosInstance";
-import Input from "../../components/common/Input";
-import Button from "../../components/common/Button";
+import QuestionForm from "../../components/common/QuestionForm";
 
 const QuestionPost = () => {
   const [postBody, setPostBody] = useState("");
   const [title, setTitle] = useState("");
   const [tags, setTags] = useState([]);
-  const theme = useTheme();
   const navigate = useNavigate();
   const { mutate, isLoading } = useMutation(
     () => apiInstance.post("/questions/add", { title, data: postBody, tags }),
@@ -35,64 +24,16 @@ const QuestionPost = () => {
 
   return (
     <Container className="container">
-      <form>
-        <InputContainer>
-          <Input
-            type="text"
-            name="title"
-            placeholder="Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </InputContainer>
-        <MDEditor
-          value={postBody}
-          onChange={setPostBody}
-          height={500}
-          previewOptions={{
-            rehypePlugins: [[rehypeSanitize]],
-          }}
-        />
-        <MDEditor.Markdown
-          source={postBody}
-          rehypePlugins={[[rehypeSanitize]]}
-        />
-        <MultiContainerContainer>
-          <Multiselect
-            isObject={false}
-            onSelect={(selectedList) => setTags(selectedList)}
-            loading={false}
-            options={["Python", "Javascript", "HTML", "CSS", "Typescript"]}
-            style={{
-              searchBox: {
-                padding: "10px",
-                marginTop: "20px",
-                background: theme.inputContrast,
-              },
-              chips: {
-                background: theme.specialBg,
-              },
-              optionContainer: {
-                background: theme.bg,
-              },
-            }}
-            closeIcon="cancel"
-          />
-        </MultiContainerContainer>
-
-        <BtnContainer>
-          <Button
-            disabled={isLoading || postBody.length === 0 || title.length === 0}
-            handleClick={(e) => {
-              e.preventDefault();
-              console.log(title, postBody, tags);
-              mutate();
-            }}
-          >
-            Submit
-          </Button>
-        </BtnContainer>
-      </form>
+      <QuestionForm
+        title={title}
+        setTitle={setTitle}
+        postBody={postBody}
+        setPostBody={setPostBody}
+        tags={tags}
+        setTags={setTags}
+        isLoading={isLoading}
+        mutate={mutate}
+      />
     </Container>
   );
 };

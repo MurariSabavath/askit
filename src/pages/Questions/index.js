@@ -74,7 +74,7 @@ const Questions = () => {
               <h1>{title}</h1>
               <TagContainer>
                 {tags.length > 0 &&
-                  tags[0].map((item, index) => <p key={index}>{item}</p>)}
+                  tags.map((item, index) => <p key={index}>{item}</p>)}
               </TagContainer>
               <DetailsRow>
                 <AuthorName>{author.name}</AuthorName>
