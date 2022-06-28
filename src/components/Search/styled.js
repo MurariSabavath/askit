@@ -1,6 +1,6 @@
+import styled from "styled-components/macro";
 import { Link } from "react-router-dom";
-import styled, { css } from "styled-components/macro";
-import { inputStyle } from "../common/Input/styled";
+import { inputStyle } from "Components/common/Input/styled";
 
 export const ResultContainer = styled.div`
   position: absolute;

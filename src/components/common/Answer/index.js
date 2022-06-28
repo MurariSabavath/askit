@@ -3,9 +3,9 @@ import MDEditor from "@uiw/react-md-editor";
 import rehypeSanitize from "rehype-sanitize";
 import { useMutation } from "react-query";
 import { toast } from "react-toastify";
+import { apiInstance } from "Services/axiosInstance";
 import { AnsContainer, ButtonContainer } from "./styled";
 import Button from "../Button";
-import { apiInstance } from "../../../services/axiosInstance";
 
 const Answer = ({ questionId, refetch }) => {
   const [ansData, setAnsData] = useState("");

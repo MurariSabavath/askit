@@ -1,6 +1,6 @@
 import { Container, VerifiedBtn } from "./styled";
-import Button from "../../components/common/Button";
 import { useNavigate } from "react-router-dom";
+import Button from "Components/common/Button";
 
 const EmailVerification = () => {
   const navigate = useNavigate();

@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { apiInstance } from "../../services/axiosInstance";
+import { apiInstance } from "Services/axiosInstance";
 
 const Profile = () => {
   const { data } = useQuery("profile-data", () => apiInstance("users/get/me"));

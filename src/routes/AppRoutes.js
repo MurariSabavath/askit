@@ -1,28 +1,27 @@
 import { Routes, Route } from "react-router-dom";
-
 import ProtectedRoutes from "./ProtectedOutlet";
-import CustomRouter from "./CustomRoute";
 import history from "../utils/history";
 import MainOutlet from "./MainOutlet";
 import AuthOutlet from "./AuthOutlet";
+import CustomRouter from "./CustomRoute";
 
-import Home from "../pages/Home";
-import Register from "../pages/Auth/Register";
-import ForgotPassword from "../pages/Auth/ForgotPassword";
-import Login from "../pages/Auth/Login";
-import Redirect from "../pages/Auth/Redirect";
-import EmailVerification from "../pages/Auth/EmailVerification";
-import InvalidEmailVerification from "../pages/Auth/InvalidEmailVerification";
-import Profile from "../pages/Profile";
-import QuestionPost from "../pages/QuestionPost";
-import Question from "../pages/Question";
-import QuestionEdit from "../pages/QuestionEdit";
-import ResetPassword from "../pages/Auth/ResetPassword";
-import Questions from "../pages/Questions";
-import UserNotVerified from "../pages/Auth/UserNotVerified";
-import UserProfile from "../pages/UserProfile";
-import Posts from "../pages/Posts";
-import Post from "../pages/Post";
+import Home from "Pages/Home";
+import Post from "Pages/Post";
+import Posts from "Pages/Posts";
+import Profile from "Pages/Profile";
+import Login from "Pages/Auth/Login";
+import Question from "Pages/Question";
+import Questions from "Pages/Questions";
+import Redirect from "Pages/Auth/Redirect";
+import Register from "Pages/Auth/Register";
+import UserProfile from "Pages/UserProfile";
+import QuestionEdit from "Pages/QuestionEdit";
+import QuestionPost from "Pages/QuestionPost";
+import ResetPassword from "Pages/Auth/ResetPassword";
+import ForgotPassword from "Pages/Auth/ForgotPassword";
+import UserNotVerified from "Pages/Auth/UserNotVerified";
+import EmailVerification from "Pages/Auth/EmailVerification";
+import InvalidEmailVerification from "Pages/Auth/InvalidEmailVerification";
 
 const AppRouter = ({ theme, setTheme }) => {
   return (

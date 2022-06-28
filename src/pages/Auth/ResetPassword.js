@@ -2,9 +2,9 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
-import { apiInstance, requestInterceptor } from "../../services/axiosInstance";
-import Button from "../../components/common/Button";
-import Input from "../../components/common/Input";
+import Input from "Components/common/Input";
+import Button from "Components/common/Button";
+import { apiInstance, requestInterceptor } from "Services/axiosInstance";
 import {
   BtnContainer,
   Container,

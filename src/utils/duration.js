@@ -13,6 +13,7 @@ const duration = (t1) => {
       hours * 60 * 60 -
       minutes * 60,
   );
+  // eslint-disable-next-line no-unused-vars
   let milliseconds = Math.floor(
     d -
       weeks * 7 * 24 * 60 * 60 * 1000 -
@@ -24,7 +25,9 @@ const duration = (t1) => {
   let t = {};
   ["weeks", "days", "hours", "minutes", "seconds", "milliseconds"].forEach(
     (q) => {
+      // eslint-disable-next-line no-eval
       if (eval(q) > 0) {
+        // eslint-disable-next-line no-eval
         t[q] = eval(q);
       }
     },

@@ -3,8 +3,8 @@ import { useQuery } from "react-query";
 import { useTheme } from "styled-components";
 import { FiSearch } from "react-icons/fi";
 import { ClickAwayListener } from "@mui/base";
-import { apiInstance } from "../../services/axiosInstance";
-import Input from "../common/Input";
+import { apiInstance } from "Services/axiosInstance";
+import Input from "Components/common/Input";
 import {
   InputContianer,
   ResultCard,

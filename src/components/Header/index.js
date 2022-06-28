@@ -98,6 +98,10 @@ const Header = ({ theme, setTheme }) => {
               <AiOutlineQuestionCircle size={18} />
               <p>Questions</p>
             </DropDownLinkContainer>
+            <DropDownLinkContainer to="/questions/create">
+              <AiOutlineQuestionCircle size={18} />
+              <p>Ask a question</p>
+            </DropDownLinkContainer>
             <Line />
 
             <DropdownBtn>

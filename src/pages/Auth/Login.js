@@ -2,8 +2,9 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
-import Button from "../../components/common/Button";
-import Input from "../../components/common/Input";
+import Input from "Components/common/Input";
+import Button from "Components/common/Button";
+import { apiInstance } from "Services/axiosInstance";
 import {
   BtnContainer,
   Container,
@@ -14,7 +15,6 @@ import {
   OrContainer,
   PasswordShowBtn,
 } from "./styled";
-import { apiInstance } from "../../services/axiosInstance";
 
 const Login = () => {
   const navigate = useNavigate();
