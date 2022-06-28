@@ -117,6 +117,7 @@ const Header = ({ theme, setTheme }) => {
                   }}
                   height={20}
                   width={40}
+                  value={isDarkMode}
                   onColor={themeContext.specialBg}
                   offColor={themeContext.dark}
                   checked={isDarkMode}
