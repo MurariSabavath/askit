@@ -9,6 +9,7 @@ import Button from "Components/common/Button";
 import Comment from "Components/common/comment";
 import Input from "Components/common/Input";
 import Answer from "Components/common/Answer";
+import AnswerPreview from "Components/common/AnswerPreview";
 import { Container, BtnFlex, CommentInputBox, ButtonContainer } from "./styled";
 import SyntaxHighlightForMarkdown from "../SyntaxHighlighterForMarkdown";
 
@@ -103,14 +104,9 @@ const Question = () => {
             <h2>{data.data.answers.length} answers</h2>
           )}
         </>
-        {data.data.answers.map(({ answer, _id, author }) => (
-          <div key={_id}>
-            <ReactMarkdown
-              components={SyntaxHighlightForMarkdown}
-              children={answer}
-            />
-          </div>
-        ))}
+        {data.data.answers.map((answer) => (
+          <AnswerPreview key={answer._id} answer ={answer} />
+          ))}
       </div>
       <Answer questionId={id} refetch={refetch} />
     </Container>
