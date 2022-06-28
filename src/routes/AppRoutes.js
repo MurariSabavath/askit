@@ -3,10 +3,12 @@ import ProtectedRoutes from "./ProtectedOutlet";
 import history from "../utils/history";
 import MainOutlet from "./MainOutlet";
 import AuthOutlet from "./AuthOutlet";
+import AdminOutlet from "./AdminOutlet";
 import CustomRouter from "./CustomRoute";
 
 import Home from "Pages/Home";
 import Post from "Pages/Post";
+import Admin from "Pages/Admin";
 import Posts from "Pages/Posts";
 import Profile from "Pages/Profile";
 import Login from "Pages/Auth/Login";
@@ -22,6 +24,7 @@ import ForgotPassword from "Pages/Auth/ForgotPassword";
 import UserNotVerified from "Pages/Auth/UserNotVerified";
 import EmailVerification from "Pages/Auth/EmailVerification";
 import InvalidEmailVerification from "Pages/Auth/InvalidEmailVerification";
+import EditProfile from "Pages/EditProfile";
 
 const AppRouter = ({ theme, setTheme }) => {
   return (
@@ -52,8 +55,12 @@ const AppRouter = ({ theme, setTheme }) => {
           <Route path="/posts/post/:id" element={<Post />} />
           <Route element={<ProtectedRoutes />}>
             <Route path="/user/profile" element={<Profile />} />
+            <Route path="/user/profile/edit" element={<EditProfile />} />
             <Route path="/user/not-verified" element={<UserNotVerified />} />
             <Route path="/questions/create" element={<QuestionPost />} />
+            <Route element={<AdminOutlet />}>
+              <Route path="/admin" element={<Admin />} />
+            </Route>
           </Route>
         </Route>
       </Routes>
