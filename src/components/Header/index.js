@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FiLogOut } from "react-icons/fi";
-import { MdOutlineClose } from "react-icons/md";
+import { MdOutlineClose, MdOutlineAdminPanelSettings } from "react-icons/md";
 import { HiMenu, HiOutlineMoon } from "react-icons/hi";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { RiUser3Line } from "react-icons/ri";
@@ -22,6 +22,7 @@ import {
   ProfileDropdown,
 } from "./styled";
 import Search from "../Search";
+import { isAdminUser } from "Utils/helpers";
 
 const Header = ({ theme, setTheme }) => {
   const navigate = useNavigate();
@@ -94,6 +95,12 @@ const Header = ({ theme, setTheme }) => {
               <RiUser3Line size={18} />
               <p>Profile</p>
             </DropDownLinkContainer>
+            {isAdminUser() && (
+              <DropDownLinkContainer to="/admin">
+                <MdOutlineAdminPanelSettings size={18} />
+                <p>Admin Panel</p>
+              </DropDownLinkContainer>
+            )}
             <DropDownLinkContainer to="/questions">
               <AiOutlineQuestionCircle size={18} />
               <p>Questions</p>
@@ -102,6 +109,7 @@ const Header = ({ theme, setTheme }) => {
               <AiOutlineQuestionCircle size={18} />
               <p>Ask a question</p>
             </DropDownLinkContainer>
+
             <Line />
 
             <DropdownBtn>

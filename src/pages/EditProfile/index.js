@@ -99,7 +99,7 @@ const EditProfile = () => {
           <FormControl>
             <FormLabel htmlFor="dob">Date of birth</FormLabel>
             <Input
-              value={profileData?.dob}
+              value={profileData?.dob || ""}
               name="dob"
               type="date"
               placeholder="dob"
@@ -120,7 +120,7 @@ const EditProfile = () => {
 
           <FormLabel htmlFor="bio">About</FormLabel>
           <MDEditor
-            value={userBio}
+            value={userBio || ""}
             onChange={setUserBio}
             height={500}
             previewOptions={{
