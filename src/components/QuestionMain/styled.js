@@ -3,20 +3,40 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { btnStyles } from "../../components/common/Button/styled";
 
-export const MainContainer = styled.section`
-  max-width: 700px;
-  margin: auto;
-  margin-bottom: 50px;
-  overflow: hidden;
+export const PostBody = styled.div`
+  display: block;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-block: 20px;
+  border: 1px solid ${({ theme }) => theme.border};
+  box-shadow: 1px 2px 5px 0px ${({ theme }) => theme.shadow};
+  -webkit-box-shadow: 1px 2px 5px 0px ${({ theme }) => theme.shadow};
+  -moz-box-shadow: 1px 2px 5px 0px ${({ theme }) => theme.shadow};
 
-  @media (max-width: 700px) {
-    margin: 20px;
+  h1 {
+    margin-top: 0;
+    margin-bottom: 0;
   }
 `;
 
-export const PostContainerRow = styled.section`
-  border-radius: 5px;
-  overflow: hidden;
+export const AuthorName = styled.p`
+  margin-bottom: 0;
+  color: ${({ theme }) => theme.special};
+  text-align: left;
+`;
+
+export const TagContainer = styled.div`
+  margin-left: -5px;
+  p {
+    background: ${({ theme }) => theme.specialBgContrast};
+    display: inline-block;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+    font-size: 12px;
+    color: ${({ theme }) => theme.specialText};
+  }
 `;
 
 export const ContainerRow = styled.div`
@@ -38,6 +58,22 @@ export const PostLink = styled(Link)`
   font-size: 14px;
   text-decoration: none;
   margin: 0;
+`;
+
+export const DetailsRow = styled.div`
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
+
+  p {
+    margin: 0;
+  }
+`;
+
+export const PostTime = styled.p`
+  color: ${({ theme }) => theme.textSoft};
+  font-size: 10px;
+  padding-left: 16px;
 `;
 
 export const Pagination = styled(ReactPaginate).attrs({

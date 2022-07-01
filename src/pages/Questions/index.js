@@ -1,24 +1,17 @@
 import Loading from "Components/common/Loading";
+import QuestionMain from "Components/QuestionMain";
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { useNavigate } from "react-router-dom";
 import { apiInstance } from "Services/axiosInstance";
-import duration from "Utils/duration";
 import {
-  AuthorName,
   ContainerRow,
-  DetailsRow,
   MainContainer,
   Pagination,
-  PostBody,
   PostContainerRow,
   PostLink,
-  PostTime,
-  TagContainer,
 } from "./styled";
 
 const Questions = () => {
-  const navigate = useNavigate();
   const [pagination, setPagination] = useState({
     perPage: 3,
     totalPages: 0,
@@ -40,7 +33,6 @@ const Questions = () => {
   );
 
   const handlePageChange = (event) => {
-    console.log(event.selected);
     setPagination({ ...pagination, currentPage: event.selected });
   };
 
@@ -73,27 +65,16 @@ const Questions = () => {
         <PostLink to="/questions/create">Want to Ask</PostLink>
       </ContainerRow>
       <PostContainerRow>
-        {data.data?.questions?.map(({ _id, title, tags, author, date }) => {
-          const diff = duration(date);
-          return (
-            <PostBody
-              key={_id}
-              onClick={() => navigate(`/questions/question/${_id}`)}
-            >
-              <h1>{title}</h1>
-              <TagContainer>
-                {tags.length > 0 &&
-                  tags.map((item, index) => <p key={index}>{item}</p>)}
-              </TagContainer>
-              <DetailsRow>
-                <AuthorName>{author.name}</AuthorName>
-                <PostTime>{`Asked ${Object.values(diff)[0]} ${
-                  Object.keys(diff)[0]
-                } ago`}</PostTime>
-              </DetailsRow>
-            </PostBody>
-          );
-        })}
+        {data.data?.questions?.map(({ _id, title, tags, author, date }) => (
+          <QuestionMain
+            key={_id}
+            _id={_id}
+            title={title}
+            tags={tags}
+            author={author}
+            date={date}
+          />
+        ))}
       </PostContainerRow>
       {isFetching && <Loading>Loading...</Loading>}
       <Pagination

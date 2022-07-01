@@ -5,10 +5,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   max-width: 975px;
   margin: auto;
-
-  @media (max-width: 600px) {
-    margin-inline: 20px;
-  }
+  padding-inline: 20px;
 `;
 
 export const FormControl = styled.div`
@@ -42,5 +39,29 @@ export const BtnContainer = styled.div`
     justify-content: flex-start;
     margin: 0;
     padding-inline: 40px;
+  }
+`;
+
+export const Border = styled.div`
+  border: 1px solid ${({ theme }) => theme.border};
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin-block: 20px;
+`;
+
+export const InputContianer = styled.div`
+  position: relative;
+  & > input {
+    padding-left: 40px;
+    ${inputStyle};
+    &::placeholder {
+      text-transform: capitalize;
+    }
+  }
+
+  svg {
+    position: absolute;
+    left: 10px;
+    top: 10px;
   }
 `;

@@ -1,13 +1,11 @@
 import { btnStyles } from "Components/common/Button/styled";
+import ReactPaginate from "react-paginate";
 import styled from "styled-components";
 
 export const Container = styled.div`
   max-width: 975px;
   margin: auto;
-
-  @media (max-width: 600px) {
-    margin-inline: 20px;
-  }
+  padding-inline: 20px;
 `;
 
 export const ProfileHeader = styled.section`
@@ -43,5 +41,39 @@ export const ContactLink = styled.a`
 
   &:hover {
     color: ${({ theme }) => theme.specialBg};
+  }
+`;
+
+export const Pagination = styled(ReactPaginate).attrs({
+  activeClassName: "active",
+})`
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  list-style-type: none;
+  li a {
+    border-radius: 7px;
+    padding: 0.1rem 1rem;
+    border: gray 1px solid;
+    cursor: pointer;
+  }
+  li.previous a,
+  li.next a,
+  li.break a {
+    border-color: transparent;
+  }
+  li.active a {
+    background-color: ${({ theme }) => theme.specialBg};
+    border-color: transparent;
+    color: white;
+    min-width: 32px;
+  }
+  li.disabled a {
+    color: grey;
+  }
+  li.disable,
+  li.disabled a {
+    cursor: default;
   }
 `;
