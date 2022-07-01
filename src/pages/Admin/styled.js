@@ -1,3 +1,4 @@
+import { BtnContainer } from "Pages/EditProfile/styled";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -16,5 +17,21 @@ export const TagContainer = styled.div`
     border-radius: 5px;
     font-size: 12px;
     color: ${({ theme }) => theme.specialText};
+  }
+`;
+
+export const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+export const NewBtnContainer = styled(BtnContainer)`
+  width: max-content;
+  margin-top: 20px;
+
+  button {
+    background: ${({ background }) => background};
+    font-size: 14px;
+    margin-left: 10px;
   }
 `;
