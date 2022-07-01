@@ -9,6 +9,8 @@ import {
   InputContainer,
   MultiContainerContainer,
 } from "./styled";
+import { apiInstance } from "Services/axiosInstance";
+import { useQuery } from "react-query";
 
 const QuestionForm = ({
   title,
@@ -21,9 +23,13 @@ const QuestionForm = ({
   mutate,
 }) => {
   const theme = useTheme();
+  const { data: tagsData, isLoading: tagsLoading } = useQuery("get-tags", () =>
+    apiInstance.get("/tags/get"),
+  );
 
   return (
     <form>
+      <h2>Post your question</h2>
       <InputContainer>
         <Input
           type="text"
@@ -47,8 +53,8 @@ const QuestionForm = ({
           isObject={false}
           selectedValues={tags}
           onSelect={(selectedList) => setTags(selectedList)}
-          loading={false}
-          options={["Python", "Javascript", "HTML", "CSS", "Typescript"]}
+          loading={tagsLoading}
+          options={tagsData?.data?.map(({ name }) => name)}
           style={{
             searchBox: {
               padding: "10px",
@@ -63,6 +69,9 @@ const QuestionForm = ({
             },
             inputField: {
               color: theme.text,
+            },
+            option: {
+              textTransform: "capitalize",
             },
           }}
           closeIcon="cancel"
