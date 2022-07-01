@@ -102,7 +102,7 @@ const Profile = () => {
       </ContactContent>
       {questionsLoading && <Loading>Loading...</Loading>}
       <h2>Questions asked by you</h2>
-      {questions.data.questions.length === 0 && (
+      {questions?.data?.questions?.length === 0 && (
         <h1>You haven't asked anything yet</h1>
       )}
       {questions?.data &&
@@ -118,7 +118,7 @@ const Profile = () => {
           />
         ))}
       {isFetching && <Loading>Loading...</Loading>}
-      {questions?.data?.questions.length > 0 && (
+      {questions?.data?.questions?.length > 0 && (
         <Pagination
           pageCount={pagination.totalPages}
           forcePage={pagination.currentPage}

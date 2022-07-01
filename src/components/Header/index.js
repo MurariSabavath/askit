@@ -40,8 +40,11 @@ const Header = ({ theme, setTheme }) => {
   const toggleTheme = () => {
     const updatedTheme = theme === "dark" ? "light" : "dark";
     setTheme(updatedTheme);
-    localStorage.setItem("theme", updatedTheme);
   };
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   useEffect(() => {
     setIsDarkMode(theme === "dark");
