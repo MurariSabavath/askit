@@ -118,11 +118,13 @@ const Profile = () => {
           />
         ))}
       {isFetching && <Loading>Loading...</Loading>}
-      <Pagination
-        pageCount={pagination.totalPages}
-        forcePage={pagination.currentPage}
-        onPageChange={handlePageChange}
-      />
+      {questions?.data?.questions.length > 0 && (
+        <Pagination
+          pageCount={pagination.totalPages}
+          forcePage={pagination.currentPage}
+          onPageChange={handlePageChange}
+        />
+      )}
     </Container>
   );
 };
