@@ -105,9 +105,9 @@ const Profile = () => {
       {questions.data.questions.length === 0 && (
         <h1>You haven't asked anything yet</h1>
       )}
-      {questions.data &&
-        questions.data.questions.length > 0 &&
-        questions.data.questions.map(({ _id, title, tags, author, date }) => (
+      {questions?.data &&
+        questions?.data?.questions.length > 0 &&
+        questions?.data?.questions.map(({ _id, title, tags, author, date }) => (
           <QuestionMain
             key={_id}
             _id={_id}
