@@ -16,10 +16,11 @@ const QuestionEdit = () => {
   const { data, isLoading, isError } = useQuery(`post-${id}`, () =>
     apiInstance.get(`/questions/get/${id}`),
   );
+  console.log("asdfasf");
 
   const { mutate, isLoading: isUpdating } = useMutation(
     () =>
-      apiInstance.post(`/questions/update/${id}`, {
+      apiInstance.put(`/questions/update/${id}`, {
         title,
         data: postBody,
         tags,

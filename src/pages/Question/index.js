@@ -12,6 +12,7 @@ import Answer from "Components/common/Answer";
 import AnswerPreview from "Components/common/AnswerPreview";
 import { Container, BtnFlex, CommentInputBox, ButtonContainer } from "./styled";
 import SyntaxHighlightForMarkdown from "../SyntaxHighlighterForMarkdown";
+import ProtectedComponent from "Components/common/ProtectedComponent";
 
 const Question = () => {
   const { id } = useParams();
@@ -33,7 +34,6 @@ const Question = () => {
       }),
     {
       onSuccess: (resp) => {
-        console.log(resp);
         toast.success("You have commented successfully");
         refetch();
       },
@@ -59,11 +59,14 @@ const Question = () => {
         components={SyntaxHighlightForMarkdown}
         children={data.data.question.data}
       />
-      <ButtonContainer>
-        <Button handleClick={() => navigate(`/questions/edit/${id}`)}>
-          Edit
-        </Button>
-      </ButtonContainer>
+      <ProtectedComponent userId={data.data.question.author._id}>
+        <ButtonContainer>
+          <Button handleClick={() => navigate(`/questions/edit/${id}`)}>
+            Edit
+          </Button>
+        </ButtonContainer>
+      </ProtectedComponent>
+
       <>
         {data.data.comments.map((comment) => (
           <Comment key={comment._id} comment={comment} />
@@ -105,8 +108,8 @@ const Question = () => {
           )}
         </>
         {data.data.answers.map((answer) => (
-          <AnswerPreview key={answer._id} answer ={answer} />
-          ))}
+          <AnswerPreview key={answer._id} answer={answer} />
+        ))}
       </div>
       <Answer questionId={id} refetch={refetch} />
     </Container>
