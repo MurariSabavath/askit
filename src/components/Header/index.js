@@ -73,7 +73,7 @@ const Header = ({ theme, setTheme }) => {
     <HeaderContainer>
       <GridOne className="one">
         <Link to="/">
-          <Logo />
+          <h1>ASKITO</h1>
         </Link>
       </GridOne>
       <GridTwo className="two">
