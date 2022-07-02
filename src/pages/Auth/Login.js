@@ -14,6 +14,7 @@ import {
   Title,
   OrContainer,
   PasswordShowBtn,
+  LogoContainer,
 } from "./styled";
 
 const Login = () => {
@@ -54,6 +55,10 @@ const Login = () => {
 
   return (
     <Container>
+      <LogoContainer>
+        <img src="./logo.png" alt="" width={100} />
+      </LogoContainer>
+
       <Title>Log In</Title>
       <SocialAuth href="https://askito.herokuapp.com/api/oauth/google">
         <img

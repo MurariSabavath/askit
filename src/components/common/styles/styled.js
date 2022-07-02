@@ -31,7 +31,7 @@ export const TagContainer = styled.div`
     text-transform: capitalize;
     background: ${({ theme }) => theme.specialBgContrast};
     padding: 5px;
-    margin: 5px;
+    margin-right: 5px;
     border-radius: 5px;
     font-size: 12px;
     color: ${({ theme }) => theme.specialText};

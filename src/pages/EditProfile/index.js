@@ -20,10 +20,15 @@ import {
   Border,
   InputContianer,
 } from "./styled";
+import { MultiContainerContainer } from "Components/common/styles/styled";
+import Multiselect from "multiselect-react-dropdown";
+import { useTheme } from "styled-components";
 
 const EditProfile = () => {
   const navigate = useNavigate();
+  const theme = useTheme();
   const [userBio, setUserBio] = useState();
+  const [tags, setTags] = useState([]);
   const [profileData, setProfileData] = useState({
     bio: "",
     dob: new Date(),
@@ -45,6 +50,11 @@ const EditProfile = () => {
     () => apiInstance.get("users/get/me"),
     { refetchOnWindowFocus: false },
   );
+  const { data: tagsData, isLoading: tagsLoading } = useQuery(
+    "get-tags",
+    () => apiInstance.get("/tags/get"),
+    { refetchOnWindowFocus: false },
+  );
 
   const { mutate } = useMutation(
     () =>
@@ -52,7 +62,7 @@ const EditProfile = () => {
         name: profileData.name,
         email: profileData.email,
         gender: "Male",
-        expertIn: [],
+        expertIn: tags,
         url: profileData.url,
         twitterUrl: profileData.twitterUrl,
         instagramUrl: profileData.instagramUrl,
@@ -128,18 +138,20 @@ const EditProfile = () => {
           </FormControl>
 
           <FormLabel htmlFor="bio">About</FormLabel>
-          <MDEditor
-            value={userBio || ""}
-            onChange={setUserBio}
-            height={500}
-            previewOptions={{
-              rehypePlugins: [[rehypeSanitize]],
-            }}
-          />
-          <MDEditor.Markdown
-            source={userBio}
-            rehypePlugins={[[rehypeSanitize]]}
-          />
+          <div data-color-mode="dark">
+            <MDEditor
+              value={userBio || ""}
+              onChange={setUserBio}
+              height={500}
+              previewOptions={{
+                rehypePlugins: [[rehypeSanitize]],
+              }}
+            />
+            <MDEditor.Markdown
+              source={userBio}
+              rehypePlugins={[[rehypeSanitize]]}
+            />
+          </div>
         </Border>
         <Border>
           <h1>Social Accounts</h1>
@@ -222,6 +234,38 @@ const EditProfile = () => {
               <AiFillMediumSquare size={25} />
             </InputContianer>
           </FormControl>
+        </Border>
+        <Border>
+          <h2>Interested areas</h2>
+          <MultiContainerContainer>
+            <Multiselect
+              isObject={false}
+              selectedValues={profileData?.expertIn}
+              onSelect={(selectedList) => setTags(selectedList)}
+              loading={tagsLoading}
+              options={tagsData?.data?.map(({ name }) => name)}
+              style={{
+                searchBox: {
+                  padding: "10px",
+                  marginTop: "20px",
+                  background: theme.inputContrast,
+                },
+                chips: {
+                  background: theme.specialBg,
+                },
+                optionContainer: {
+                  background: theme.bg,
+                },
+                inputField: {
+                  color: theme.text,
+                },
+                option: {
+                  textTransform: "capitalize",
+                },
+              }}
+              closeIcon="cancel"
+            />
+          </MultiContainerContainer>
         </Border>
 
         <BtnContainer>

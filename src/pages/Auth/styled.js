@@ -22,6 +22,12 @@ export const Container = styled.div`
     margin: auto;
   }
 `;
+export const LogoContainer = styled.div`
+  img {
+    margin: auto;
+    display: flex;
+  }
+`;
 
 export const BtnContainer = styled.div`
   width: 100%;
@@ -42,7 +48,9 @@ export const VerifiedBtn = styled(BtnContainer)`
 `;
 
 export const Title = styled.h1`
-  font-size: 18px;
+  margin-block: 30px;
+  text-align: center;
+  font-size: 30px;
   font-weight: 500;
 `;
 

@@ -14,6 +14,7 @@ import {
   Title,
   OrContainer,
   PasswordShowBtn,
+  LogoContainer,
 } from "./styled";
 
 const Register = () => {
@@ -55,6 +56,9 @@ const Register = () => {
 
   return (
     <Container>
+      <LogoContainer>
+        <img src="./logo.png" alt="" width={100} />
+      </LogoContainer>
       <Title>Sign Up</Title>
       <SocialAuth href={`${process.env.REACT_APP_API_URL}/oauth/google`}>
         <img

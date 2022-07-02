@@ -10,14 +10,18 @@ import {
   ContactContent,
   ContactLink,
   Container,
+  LocationContainer,
   Pagination,
   ProfileHeader,
 } from "./styled";
 import { useNavigate } from "react-router-dom";
 import QuestionMain from "Components/QuestionMain";
 import { useEffect, useState } from "react";
-import SyntaxHighlightForMarkdown from "Pages/SyntaxHighlighterForMarkdown";
-import ReactMarkdown from "react-markdown";
+import { TagContainer } from "Components/common/styles/styled";
+import { Border } from "Pages/EditProfile/styled";
+import { HiLocationMarker } from "react-icons/hi";
+import MDEditor from "@uiw/react-md-editor";
+import rehypeSanitize from "rehype-sanitize";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -102,17 +106,46 @@ const Profile = () => {
           </ContactLink>
         )}
       </ContactContent>
-      <h3>About</h3>
-      <ReactMarkdown
-        components={SyntaxHighlightForMarkdown}
-        children={data?.data.bio}
-      />
+      <LocationContainer>
+        <HiLocationMarker />
+        <p>{data?.data.location}</p>
+      </LocationContainer>
+
+      <Border>
+        <h3>About</h3>
+
+        <div data-color-mode="dark">
+          <MDEditor.Markdown
+            source={data?.data.bio}
+            rehypePlugins={[[rehypeSanitize]]}
+          />
+        </div>
+
+        {/* <ReactMarkdown
+          components={SyntaxHighlightForMarkdown}
+          children={data?.data.bio}
+        /> */}
+      </Border>
+
+      <Border>
+        {data?.data.expertIn.length > 0 && (
+          <>
+            <h2 style={{ margin: 0 }}>Interested tags</h2>
+            <TagContainer>
+              {data?.data.expertIn.map((item, index) => (
+                <p key={index}>{item}</p>
+              ))}
+            </TagContainer>
+          </>
+        )}
+      </Border>
 
       {questionsLoading && <Loading>Loading...</Loading>}
       <h2>Questions asked by you</h2>
       {questions?.data?.questions?.length === 0 && (
         <h1>You haven't asked anything yet</h1>
       )}
+
       {questions?.data &&
         questions?.data?.questions.length > 0 &&
         questions?.data?.questions.map(({ _id, title, tags, author, date }) => (

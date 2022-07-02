@@ -31,6 +31,18 @@ export const ContactContent = styled.div`
   padding-top: 10px;
 `;
 
+export const LocationContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: ${({ theme }) => theme.textSoft};
+
+  p {
+    color: ${({ theme }) => theme.textSoft};
+    padding-left: 5px;
+  }
+`;
+
 export const ContactLink = styled.a`
   text-decoration: none;
   font-size: 1.25rem;

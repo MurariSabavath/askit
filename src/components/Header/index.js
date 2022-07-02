@@ -23,7 +23,6 @@ import {
 } from "./styled";
 import Search from "../Search";
 import { isAdminUser } from "Utils/helpers";
-import Logo from "Assets/Logo";
 
 const Header = ({ theme, setTheme }) => {
   const navigate = useNavigate();
@@ -74,7 +73,7 @@ const Header = ({ theme, setTheme }) => {
     <HeaderContainer>
       <GridOne className="one">
         <Link to="/">
-          <h3>ASKITO</h3>
+          <img src="./logo.png" alt="" width={100} />
         </Link>
       </GridOne>
       <GridTwo className="two">

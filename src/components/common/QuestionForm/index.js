@@ -47,7 +47,13 @@ const QuestionForm = ({
           rehypePlugins: [[rehypeSanitize]],
         }}
       />
-      <MDEditor.Markdown source={postBody} rehypePlugins={[[rehypeSanitize]]} />
+      <div data-color-mode="light">
+        <MDEditor.Markdown
+          source={postBody}
+          rehypePlugins={[[rehypeSanitize]]}
+        />
+      </div>
+
       <MultiContainerContainer>
         <Multiselect
           isObject={false}
