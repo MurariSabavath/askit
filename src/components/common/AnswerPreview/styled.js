@@ -22,8 +22,18 @@ export const Para = styled.div`
 `;
 
 export const UserName = styled(Profile)`
-  font-size: inherit;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  border-bottom-width: 2px;
+  color: ${({ theme }) => theme.text};
+  text-decoration: none;
   padding-left: 3px;
+
+  &:hover {
+    color: ${({ theme }) => theme.specialBg};
+    text-decoration: underline;
+  }
 `;
 
 export const MarkdownPreview = styled.div`

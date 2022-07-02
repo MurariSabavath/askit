@@ -26,21 +26,23 @@ const Answer = ({ questionId, refetch }) => {
     },
   );
   return (
-    <AnsContainer>
-      <MDEditor
-        value={ansData}
-        onChange={setAnsData}
-        height={500}
-        previewOptions={{
-          rehypePlugins: [[rehypeSanitize]],
-        }}
-      />
-      <ButtonContainer>
-        <Button handleClick={() => mutate()} isLoading={isLoading}>
-          Post your answer
-        </Button>
-      </ButtonContainer>
-    </AnsContainer>
+    <>
+      <AnsContainer>
+        <MDEditor
+          value={ansData}
+          onChange={setAnsData}
+          height={500}
+          previewOptions={{
+            rehypePlugins: [[rehypeSanitize]],
+          }}
+        />
+        <ButtonContainer>
+          <Button handleClick={() => mutate()} isLoading={isLoading}>
+            Post your answer
+          </Button>
+        </ButtonContainer>
+      </AnsContainer>
+    </>
   );
 };
 

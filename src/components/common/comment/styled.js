@@ -32,15 +32,15 @@ export const Header = styled.div`
 `;
 
 export const Profile = styled(Link)`
-  font-weight: 400;
+  font-weight: 600;
   font-size: 15px;
   cursor: pointer;
   border-bottom-width: 2px;
   color: ${({ theme }) => theme.text};
   text-decoration: none;
+
   &:hover {
     color: ${({ theme }) => theme.specialBg};
-    font-weight: 400;
     text-decoration: underline;
   }
 `;

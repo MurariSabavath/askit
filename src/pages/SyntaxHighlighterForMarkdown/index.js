@@ -535,7 +535,7 @@ const SyntaxHighlightForMarkdown = {
     return match ? (
       <SyntaxHighlighter
         style={darcula}
-        language={match[0]}
+        language={match[1]}
         PreTag="div"
         className="codeStyle"
         showLineNumbers={true}
