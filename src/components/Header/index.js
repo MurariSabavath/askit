@@ -63,11 +63,11 @@ const Header = ({ theme, setTheme }) => {
     }
   }, []);
 
-  useEffect(() => {
-    if (user !== null && !user.isVerified) {
-      navigate("/user/not-verified");
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user !== null && !user.isVerified) {
+  //     navigate("/user/not-verified");
+  //   }
+  // }, [user]);
 
   return (
     <HeaderContainer>
