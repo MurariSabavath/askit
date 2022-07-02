@@ -30,10 +30,11 @@ const AppRouter = ({ theme, setTheme }) => {
   return (
     <CustomRouter history={history}>
       <Routes>
+        <Route path="/email/verify" element={<EmailVerification />} />
+
         <Route element={<AuthOutlet />}>
           <Route path="/login" element={<Login />} />
           <Route path="/usertoken" element={<Redirect />} />
-          <Route path="/email/verify" element={<EmailVerification />} />
           <Route
             path="/email/verify/invalid"
             element={<InvalidEmailVerification />}
