@@ -72,6 +72,7 @@ const Admin = () => {
                 if (tag.length > 0) {
                   mutate();
                   refetch();
+                  setTag("");
                 } else {
                   toast.warn("Tag should not be empty");
                 }

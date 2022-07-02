@@ -24,6 +24,7 @@ export const responseInterceptor = apiInstance.interceptors.response.use(
   (error) => {
     if (axios.isAxiosError(error)) {
       if (error.response && error.response.status === 401) {
+        localStorage.clear();
         history.replace("/login");
       }
     }

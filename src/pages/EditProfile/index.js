@@ -25,7 +25,6 @@ const EditProfile = () => {
   const navigate = useNavigate();
   const [userBio, setUserBio] = useState();
   const [profileData, setProfileData] = useState({
-    _id: "",
     bio: "",
     dob: new Date(),
     email: "",
@@ -50,8 +49,18 @@ const EditProfile = () => {
   const { mutate } = useMutation(
     () =>
       apiInstance.put("users/update", {
-        ...profileData,
+        name: profileData.name,
+        email: profileData.email,
         gender: "Male",
+        expertIn: [],
+        url: profileData.url,
+        twitterUrl: profileData.twitterUrl,
+        instagramUrl: profileData.instagramUrl,
+        githubUrl: profileData.githubUrl,
+        linkedInUrl: profileData.linkedInUrl,
+        mediumUrl: profileData.mediumUrl,
+        stackOverFlowUrl: profileData.stackOverFlowUrl,
+        location: profileData.location,
         bio: userBio,
       }),
     {

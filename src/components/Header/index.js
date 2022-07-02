@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { FiLogOut } from "react-icons/fi";
+import { FiLogIn, FiLogOut } from "react-icons/fi";
 import { MdOutlineClose, MdOutlineAdminPanelSettings } from "react-icons/md";
 import { HiMenu, HiOutlineMoon } from "react-icons/hi";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
@@ -33,7 +33,8 @@ const Header = ({ theme, setTheme }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   const handleLogout = () => {
-    localStorage.clear();
+    localStorage.removeItem("user");
+    localStorage.removeItem("access_token");
     toast.success("Logout success!");
     navigate("/login");
   };
@@ -73,7 +74,7 @@ const Header = ({ theme, setTheme }) => {
     <HeaderContainer>
       <GridOne className="one">
         <Link to="/">
-          <h1>ASKITO</h1>
+          <h3>ASKITO</h3>
         </Link>
       </GridOne>
       <GridTwo className="two">
@@ -92,15 +93,22 @@ const Header = ({ theme, setTheme }) => {
       {showDropdown && (
         <ClickAwayListener onClickAway={() => setShowDropdown(false)}>
           <ProfileDropdown>
-            <ProfileBox>
-              <RiUser3Line size={25} />
-              <p>{user?.name}</p>
-            </ProfileBox>
-            <Line />
-            <DropDownLinkContainer to="/user/profile">
-              <RiUser3Line size={18} />
-              <p>Profile</p>
-            </DropDownLinkContainer>
+            {user != null && (
+              <>
+                <ProfileBox>
+                  <RiUser3Line size={25} />
+                  <p>{user?.name}</p>
+                </ProfileBox>
+                <Line />
+              </>
+            )}
+
+            {user !== null && (
+              <DropDownLinkContainer to="/user/profile">
+                <RiUser3Line size={18} />
+                <p>Profile</p>
+              </DropDownLinkContainer>
+            )}
             {isAdminUser() && (
               <DropDownLinkContainer to="/admin">
                 <MdOutlineAdminPanelSettings size={18} />
@@ -141,10 +149,17 @@ const Header = ({ theme, setTheme }) => {
               </div>
             </DropdownBtn>
             <Line />
-            <DropdownBtn onClick={handleLogout}>
-              <FiLogOut size={18} />
-              <p>Logout</p>
-            </DropdownBtn>
+            {user === null ? (
+              <DropdownBtn onClick={() => navigate("/login")}>
+                <FiLogIn size={18} />
+                <p>Login</p>
+              </DropdownBtn>
+            ) : (
+              <DropdownBtn onClick={handleLogout}>
+                <FiLogOut size={18} />
+                <p>Logout</p>
+              </DropdownBtn>
+            )}
           </ProfileDropdown>
         </ClickAwayListener>
       )}

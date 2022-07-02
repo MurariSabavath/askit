@@ -1,9 +1,14 @@
 import { Container, VerifiedBtn } from "./styled";
 import { useNavigate } from "react-router-dom";
 import Button from "Components/common/Button";
+import { useEffect } from "react";
 
 const EmailVerification = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
 
   return (
     <Container>

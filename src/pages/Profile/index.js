@@ -16,6 +16,8 @@ import {
 import { useNavigate } from "react-router-dom";
 import QuestionMain from "Components/QuestionMain";
 import { useEffect, useState } from "react";
+import SyntaxHighlightForMarkdown from "Pages/SyntaxHighlighterForMarkdown";
+import ReactMarkdown from "react-markdown";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -75,31 +77,37 @@ const Profile = () => {
       </ProfileHeader>
       <ContactContent>
         {data?.data.instagramUrl !== null && (
-          <ContactLink>
-            <FiInstagram />
+          <ContactLink href={data?.data.instagramUrl} target="_blank">
+            <FiInstagram size={20} />
           </ContactLink>
         )}
         {data?.data.twitterUrl !== null && (
-          <ContactLink>
-            <BsTwitter />
+          <ContactLink href={data?.data.twitterUrl} target="_blank">
+            <BsTwitter size={20} />
           </ContactLink>
         )}
         {data?.data.githubUrl !== null && (
-          <ContactLink>
-            <AiFillGithub />
+          <ContactLink href={data?.data.githubUrl} target="_blank">
+            <AiFillGithub size={20} />
           </ContactLink>
         )}
         {data?.data.linkedInUrl !== null && (
-          <ContactLink>
-            <BsLinkedin />
+          <ContactLink href={data?.data.linkedInUrl} target="_blank">
+            <BsLinkedin size={20} />
           </ContactLink>
         )}
         {data?.data.mediumUrl !== null && (
-          <ContactLink>
-            <AiFillMediumSquare />
+          <ContactLink href={data?.data.mediumUrl} target="_blank">
+            <AiFillMediumSquare size={20} />
           </ContactLink>
         )}
       </ContactContent>
+      <h3>About</h3>
+      <ReactMarkdown
+        components={SyntaxHighlightForMarkdown}
+        children={data?.data.bio}
+      />
+
       {questionsLoading && <Loading>Loading...</Loading>}
       <h2>Questions asked by you</h2>
       {questions?.data?.questions?.length === 0 && (

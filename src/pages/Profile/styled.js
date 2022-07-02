@@ -34,7 +34,7 @@ export const ContactContent = styled.div`
 export const ContactLink = styled.a`
   text-decoration: none;
   font-size: 1.25rem;
-  margin-right: 15px;
+  margin-right: 5px;
   color: ${({ theme }) => theme.textSoft};
   transition: 0.2s linear;
   cursor: pointer;
