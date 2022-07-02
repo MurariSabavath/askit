@@ -23,6 +23,7 @@ export const Para = styled.div`
 
 export const UserName = styled(Profile)`
   font-size: inherit;
+  padding-left: 3px;
 `;
 
 export const MarkdownPreview = styled.div`
